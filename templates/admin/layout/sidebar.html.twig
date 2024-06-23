@@ -1,0 +1,95 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <div class="sidebar">
+
+        {% set cUri = app.request.get('_route') %}
+
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{asset('lte/img/avatar-160x160.png')}}" class="img-circle" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="{{path('app_profile')}}" class="d-block">{{app.user.name|capitalize}}</a>
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item has-treeview menu-open bg-warning">
+                    <a href="{{path('app_admin_index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-header">CONTENTS</li>
+
+                <li class="nav-item">
+                    <a href="{{path('app_admin_users_index')}}" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+
+                {% set isNewsletterTreeOpen = 'app_admin_newsletter_index' == cUri or
+                'app_admin_newsletter_subscribers_index' == cUri%}
+
+                <li class="nav-item {{ isNewsletterTreeOpen ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper fs-15"></i>
+                        <p>
+                            {{ 'E-mail Marketing'|trans }}
+                            <i class="fas fa-angle-left right fs-15"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview {{ isNewsletterTreeOpen == cUri ? 'active' : '' }}">
+                        <li class="nav-item {{ 'app_admin_newsletter_index' == cUri ? 'item-active' : '' }}">
+                            <a href="{{ path('app_admin_newsletter_index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon text-warning fs-15"></i>
+                                <p>{{ 'Newsletter'|trans }}</p>
+                            </a>
+                        </li>
+                        <li
+                            class="nav-item {{ 'app_admin_newsletter_subscribers_index' == cUri ? 'item-active' : '' }}">
+                            <a href="{{ path('app_admin_newsletter_subscribers_index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon text-primary fs-15"></i>
+                                <p>{{ 'Subscriber'|trans }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Messages
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Overview</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-header">EXTRA</li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Logs</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

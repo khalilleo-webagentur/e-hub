@@ -1,0 +1,13 @@
+
+/* 4 views */
+.ql-container.ql-snow {
+    border: none;
+}
+
+.ql-editor {
+    padding: 0;
+}
+
+.ql-editor p {
+    font-size: 16px;
+}

@@ -1,0 +1,39 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+<div class="modal fade" id="deleteAllSubscribersModal" tabindex="-1" role="dialog"
+    aria-labelledby="deleteAllSubscribersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-title-upper" id="deleteAllSubscribersModalLabel">
+                    {{ 'Delete Subscribers permanently'|trans }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('app_admin_newsletter_job_subscribers_delete_by_date') }}" method="post">
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p class="modal-p">{{ 'The Subscribers, these have no token, the subscribtion date older than last six months
+                            and isSubscribed flag is red [false], will be deleted permanently.'|trans }}
+                        </p>
+                    </div>
+
+                    {% include 'admin/component/info/action_cannot_be_undone.html.twig' %}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light cancel btn-radius-50" data-dismiss="modal">
+                        {{ 'Cancel'|trans }}
+                    </button>
+                    <button type="submit" class="btn btn-warning btn-radius-50">{{ 'Clean Up'|trans }}</button>
+                    <input type="hidden" name="deleteSubscribers" value="on">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}

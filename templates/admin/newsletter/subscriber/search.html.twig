@@ -1,0 +1,43 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %} Admin Dashboard :: {{ 'Search'|trans }} {% endblock %}
+
+{% block body %}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="m-0 pt-1 h4-title">
+                    {{ 'Result'|trans }}
+                    "{{ keyword is defined and keyword ? keyword|capitalize : '' }}"
+                    ({{ subscribers is defined and subscribers ? count(subscribers) : 0 }})
+                </h4>
+            </div>
+            <div class="col-2">
+                <ol class="breadcrumb float-right mt-1">
+                    {% include 'admin/component/route/back_after_search.html.twig' with {route:route} %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'admin/newsletter/subscriber/partial/table_content.html.twig' %}
+        </div>
+
+        <div class="row">
+            <section class="col-lg-7 connectedSortable"></section>
+            <section class="col-lg-5 connectedSortable"></section>
+        </div>
+    </div>
+</section>
+
+{% if subscribers is defined and subscribers %}
+{% include 'admin/newsletter/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
+{% endif %}
+
+{% endblock %}

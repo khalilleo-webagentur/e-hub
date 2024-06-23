@@ -1,0 +1,18 @@
+<div class="dropzone-wrapper">
+    <div class="dropzone-desc showFileNameAfterUpload">
+        <i class="fa fa-upload"></i>
+        <p>{{ 'Choose your file or drag it here'|trans }} 
+            <span class="text-danger">
+                {{required is defined and required ? '*' : ''}}
+            </span>
+        </p>
+    </div>
+    <input type="file" id="{{ id is defined and id ? id : 'importFile' }}"
+        name="{{ name is defined and name ? name : 'importFile' }}" class="dropzone importFile"
+        accept="{{ accept is defined and accept ? accept : 'text/plain,text/csv,.csv' }}"
+        {{ required is defined and required ? 'required="true"' : ''}}>
+</div>
+
+{% if help is defined and help %}
+    <small class="text-secondary">{{help}}</small>
+{% endif %}

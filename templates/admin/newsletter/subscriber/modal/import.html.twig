@@ -1,0 +1,87 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-title-upper" id="uploadLabel">
+                    {{ 'Import Subscribers'|trans }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{path('app_admin_newsletter_subscribers_import')}}" method="post"
+                enctype="multipart/form-data">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="modal-body">
+
+                    <div class="form-group pb-0 mb-0">
+                        <p class="modal-p mb-0 pb-0">Import json or csv file which includes subscribers data.</p>
+                    </div>
+
+                    <div class="form-group pb-0 mb-0">
+                        <span class="font-size-15">
+                            <a class="text-info" data-toggle="collapse" href="#collapseInfo" role="button"
+                                aria-expanded="false" aria-controls="collapseInfo">
+                                <span class="fa fa-info-circle fa-sm"></span>
+                            </a>
+                        </span>
+                        <div class="collapse" id="collapseInfo">
+                            <div class="p-3 border-1"
+                                style="background-color: rgb(252, 255, 228); border: 1px solid #eee;">
+                                
+                                <small>
+                                    JSON example: <br>
+                                [
+                                    {
+                                        "name": "john",
+                                        "email": "john@example.com",
+                                    },
+                                    ...
+                                ]
+                                <br>
+                                CSV example: <br>
+                                nameValue; emailValue (Seperator is semi-colon ";")
+                                </small>
+
+                                <p class="mb-0 fs-13">- Name is <span class="text-info">optional</span><br>
+                                    - Email is <span class="text-danger">required</span><br>
+                                    - File extension must be (.json or .csv)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="my-2">
+                            {% include 'admin/component/field/drag_and_drop.html.twig' with {
+                                id: 'fileType',
+                                name: 'type',
+                                required: true,
+                                help: 'Allowed ext. (json and csv)',
+                                accept: '.json,text/csv,.csv'
+                            } %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="subscribed" name="subscribed">
+                            <label class="form-check-label" for="subscribed">
+                                {{ 'Mark them as subscribed'|trans}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light sm-d-none cancelFile btn-radius-50" data-dismiss="modal">
+                        {{ 'Cancel'|trans }}
+                    </button>
+                    <input type="hidden" name="seperator" value=";">
+                    <button type="submit" class="btn btn-success btn-radius-50">{{ 'Import'|trans }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}

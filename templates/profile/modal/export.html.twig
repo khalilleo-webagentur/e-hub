@@ -1,0 +1,28 @@
+<div class="modal fade removeModalAfterClick" id="exportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-dark fs-5" id="exportModalLabel">Download Personal Data</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{{path('app_profile_personal_data_download')}}" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <p class="text-dark-50">
+                            Save your data after that in a safe place!
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                        style="border-radius: 2px;height: 40px;">Cancel</button>
+                    <button type="submit" class="btn btn-primary rmModal"
+                        style="border-radius: 2px;height: 40px;">Download Data</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

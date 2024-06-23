@@ -1,0 +1,24 @@
+parameters:
+
+  app_name: "e-hub"
+  full_app_name: "e-hub"
+  no_reply: "no-reply@khalilleo.com"
+
+  webmaster_name: "Webmaster"
+  webmaster_email: "demo@khalilleo.com"
+
+  phonenumber: '0163/616-5396'
+  support_emal: 'help@khalilleo.com'
+  info_emal: 'info@khalilleo.com'
+  legal_emal: 'legal@khalilleo.com'
+
+  address_street: 'Paul-Gerhardt-Str. 7'
+  adress_plz: '74321'
+  adress_city: 'Bietigheim-Bissingen'
+  adress_country: 'Deutschland'
+
+  app_version: "1.0.0"
+  
+  app_author: "Khalilleo Teams"
+  app_created: "2024-06-22"
+  app_made_by: "khalilleo.com"

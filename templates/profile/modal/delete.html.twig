@@ -1,0 +1,35 @@
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-dark fs-5" id="deleteModalLabel">Delete My Account</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{{path('app_profile_personal_data_delete')}}" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <p class="text-dark-50">
+                            Note all your data will be deleted permanently. This action cannot be undone!
+                        </p>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input"
+                            type="checkbox" name="confirm" id="confirm" required>
+                        <label class="form-check-label text-dark-50" for="confirm">
+                            I confirm the deletion of all my data.
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                        style="border-radius: 2px;height: 40px;">Cancel</button>
+                    <button type="submit" class="btn btn-danger"
+                        style="border-radius: 2px;height: 40px;">Delete Account</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

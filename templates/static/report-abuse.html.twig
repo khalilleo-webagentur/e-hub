@@ -1,0 +1,82 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %} Linkone Report Abuse {% endblock %}
+
+{% block body %}
+
+{% include 'layout/navbar.html.twig' %}
+
+{% include 'component/custom_type_message_top_fixed.html.twig' %}
+
+<header class="container" style="padding-bottom: 180px;">
+    <div class="px-lg-5 pb-5">
+        <div class="row gx-lg-5 h-100 justify-content-center py-3">
+            <div class="col-lg-6">
+
+                <h1 class="d-color font-weight-bold mt-lg-5 pt-5 mb-3">
+                    Report Us Malicious Link
+                </h1>
+
+                <p class="text-white-50 mb-lg-5 mb-md-3">
+                    The bellow form can be used for reporting links that suspected of span, phishing, porn etc.
+                    The Link will be reviewed and then will be deleted immediately.
+                </p>
+
+                <form action="{{path('app_report_abuse_new')}}" method="post" class="px-2">
+                    <div class="mb-3">
+                        <label for="iMalicious" class="form-label text-white-50">Malicious Link</label>
+                        <input type="text" class="form-control" id="iMalicious" placeholder="Paste link (required)"
+                            style="height: 46px; border-radius: 0;"
+                            required name="iMaliciousLink" style="height: 46px; border-radius: 0;">
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="text-white-50 mb-1">Select your Option</p>
+                        <select class="form-select bg-dark text-white-50" aria-label="Default select sMaliciousOption"
+                            style="height: 46px; border-radius: 0;"
+                            required name="sMaliciousOption">
+                            <option selected>---</option>
+                            <option value="Span">Spam</option>
+                            <option value="Phishing">Phishing</option>
+                            <option value="Malicious">Malicious</option>
+                            <option value="Porn">Porn</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="iMessage" class="form-label text-white-50">Message</label>
+                        <textarea class="form-control" id="iMessage" rows="5" name="iMessage"
+                            style="border-radius: 0;"
+                            placeholder="Type your message (optional)"></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success" type="submit"
+                            style="height: 46px; border-radius: 0;">Send</button>
+                    </div>
+
+                    <div class="my-3">
+                        <small class="text-secondary" style="font-size: 13px;">
+                            <span class="bi bi-info-circle pe-1"></span> By submitting this form, you agree to our
+                            <a href="{{path('app_legal_privacy_policy')}}" class="text-white-50 text-decoration-none"
+                                rel="nofollow">Privacy
+                                Policy</a>.
+                        </small>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="md-d-none py-3 text-center mt-5 pt-5" style="opacity: 0.02;">
+                    <img src="{{asset('assets/img/abuse.png')}}" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+{% include 'layout/footer.html.twig' %}
+
+{% endblock %}

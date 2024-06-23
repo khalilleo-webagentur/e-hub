@@ -1,0 +1,68 @@
+{% extends 'layout/base_without.html.twig' %}
+
+{% block title %} Sign up {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="container p-0">
+        <div class="row justify-content-center pt-5">
+            <div class="col-lg-4 pt-5">
+                <div class="d-border p-4">
+
+                    <div class="text-center pt-3">
+                        <a href="{{app.request.schemeAndHttpHost}}">
+                            <img src="{{asset('assets/img/logo.png')}}" alt="{{appName()}}" height="50">
+                        </a>
+                        <h3 class="my-1 text-center text-dark-50">Get Started</h3>
+                        <p class="text-center text-dark-50 mb-3">Sign up with work email</p>
+                    </div>
+
+                    {% include 'component/form_alert.html.twig' %}
+
+                    <form action="{{ path('app_register_new') }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="mb-3">
+                            <input class="form-control" type="text" placeholder="Name" aria-label="Full-Name"
+                                name="name" required
+                                style="height: 46px; border-radius: 0;">
+                        </div>
+
+                        <div class="mb-3">
+                            <input class="form-control" type="email" placeholder="Email" aria-label="Email"
+                                name="_username" required
+                                style="height: 46px; border-radius: 0;">
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input"
+                                style="background-color: #0000001c;border: 1px solid #535353;" type="checkbox"
+                                name="confirm" required id="confirm">
+                            <label class="form-check-label text-dark-50" for="confirm">
+                                I accept {{appName()}}'s <a href="{{path('app_legal_privacy_policy')}}"
+                                    class="text-dark-50" rel="nofollow">
+                                    Privacy Policy
+                                </a>
+                            </label>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-success w-100" style="height: 46px; border-radius: 0;">
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="my-3 text-center">
+                        <p class="text-dark-50"> Already have an account?
+                            <a href="{{path('app_login')}}" class="d-color text-decoration-none">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

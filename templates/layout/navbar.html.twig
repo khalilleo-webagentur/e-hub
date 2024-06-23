@@ -1,0 +1,37 @@
+<nav class="navbar bg-white">
+  <div class="container-fluid">
+    <a href="{{app.request.schemeAndHttpHost}}" class="navbar-brand">
+      <img src="{{asset('assets/img/logo.png')}}" alt="LOGO {{appName()}}" height="23"> {{appName()}}
+    </a>
+    <div class="d-flex">
+      {% if is_granted('ROLE_USER') %}
+      <div class="btn-group">
+        <button type="button" class="btn btn-light dropdown-toggle text-secondary" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false">
+          <span class="bi bi-person-circle pe-1"></span> {{app.user.name}}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a href="{{path('app_home')}}" class="dropdown-item" type="button">
+              <span class="bi bi-house pe-1"></span> Home</a>
+          </li>
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+          <a href="{{path('app_admin_index')}}" class="dropdown-item">
+            <span class="bi bi-speedometer2 pe-1"></span> Dashboard
+          </a>
+          {% endif %}
+          <li><a href="{{path('app_profile')}}" class="dropdown-item" type="button">
+              <span class="bi bi-person pe-1"></span> Profile</a>
+          </li>
+          <li><a href="{{path('app_logout')}}" class="dropdown-item" type="button">
+              <span class="bi bi-door-closed pe-1"></span> Logout</a>
+          </li>
+        </ul>
+      </div>
+      {% else %}
+      <a href="{{path('app_auth')}}" class="btn btn-outline-secondary">
+        Login <span class="bi bi-person"></span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

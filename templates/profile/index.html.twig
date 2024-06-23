@@ -1,0 +1,98 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %} My Profile {% endblock %}
+
+{% block body %}
+
+{% include 'layout/navbar.html.twig' %}
+
+{% include 'component/custom_type_message_top_fixed.html.twig' %}
+
+<div class="container-fluid" style="height: 100vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h5 class="text-dark-50 mt-lg-5 mt-md-3">My Profile</h5>
+
+                <div class="bg-white">
+
+                    <div class="row p-3 py-lg-4">
+                        <div class="col">
+                            <img src="{{asset('assets/img/avatar-160x160.png')}}" height="180px" alt="Avatar" style="border-radius: 15px;">
+                        </div>
+                        <div class="col-10">
+                            <p class="float-end small md-d-none">
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="{{path('app_admin_index')}}" class="text-dark-50">Dashboard</a>
+                                {% endif %}
+                            </p>
+                            <p class="text-dark-50 pt-3">Username: {{app.user.name}}</p>
+                            <p class="text-dark-50">Email: {{app.user.email}}</p>
+                            <p class="text-dark-50">Created: {{app.user.createdAt|date('d.m.Y')}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h5 class="text-dark-50 mt-5">Setting</h5>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                    <div class="col">
+                        <div class="card h-100 d-border">
+                            <div class="card-body">
+                                <h6 class="card-title text-dark-50 mb-0 py-lg-2" data-bs-toggle="modal" data-bs-target="#usernameModal">
+                                    Change Username <span class="float-end text-secondary pointer bi bi-pencil-square"></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 d-border">
+                            <div class="card-body">
+                                <h6 class="card-title text-dark-50 mb-0 py-lg-2" data-bs-toggle="modal" data-bs-target="#emailModal">
+                                    Change Email <span class="float-end text-secondary pointer bi bi-pencil-square"></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 d-border">
+                            <div class="card-body">
+                                <h6 class="card-title text-dark-50 mb-0 py-lg-2"  data-bs-toggle="modal" data-bs-target="#exportModal">
+                                    Download Personal Data <span class="float-end text-secondary pointer bi bi-download"></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 d-border">
+                            <div class="card-body">
+                                <h6 class="card-title text-dark-50 mb-0 py-lg-2"data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    Delete Account <span class="float-end text-secondary pointer bi bi-trash"></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="text-dark-50 mt-5">Support</h5>
+
+            <p class="text-dark-50 pb-5 mb-5">
+                If you have any questions about your account, please use the 
+                <a href="{{path('app_contact_us_index')}}" class="text-secondary">contact form</a> or
+                <a href="mailto::{{email}}" class="text-secondary">email us</a> directly.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% include 'profile/modal/update_username.html.twig' %}
+{% include 'profile/modal/update_email.html.twig' %}
+{% include 'profile/modal/export.html.twig' %}
+{% include 'profile/modal/delete.html.twig' %}
+
+{% include 'layout/footer.html.twig' %}
+
+{% endblock %}

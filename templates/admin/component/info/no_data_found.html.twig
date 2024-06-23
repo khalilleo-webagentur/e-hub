@@ -1,0 +1,21 @@
+<div class="col-md-12 mt-3">
+
+    <div class="col-md-12 mt-3 text-center pt-5 mt-5">
+
+        <div class="mt-5 pt-4">
+            <img src="{{asset('lte/img/no_data_found.svg')}}" width="120" alt="">
+        </div>
+
+        <p class="mt-3">
+            {{ 'No data has been found!'|trans }} <br>
+        </p>
+
+        <div class="mt-3">
+            {% include 'admin/component/route/back.html.twig' with {
+                routeName: routeName is defined and routeName ? routeName : 'app_admin_users_index',
+                linkText: linkText is defined and linkText  ? linkText : 'Back to Users'|trans
+            } %}
+        </div>
+    </div>
+
+</div>

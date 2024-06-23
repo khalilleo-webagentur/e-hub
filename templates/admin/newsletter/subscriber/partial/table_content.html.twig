@@ -1,0 +1,82 @@
+{% if subscribers is defined and subscribers %}
+<div class="col-md-12">
+    <div class="card-body table-responsive bg-white p-0 mb-3">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr class="fs-14">
+                    <th>{{ 'Name'|trans }}</th>
+                    <th>{{ 'Email'|trans }}</th>
+                    <th>{{ 'Subscribed'|trans }}</th>
+                    <th>{{ 'HasReceived'|trans }}</th>
+                    <th>{{ 'Modified'|trans }}</th>
+                    <th>{{ 'Created'|trans }}</th>
+                    <th>{{ 'Action'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for subscriber in subscribers %}
+
+                <tr class="table-text-color font-size-14">
+                    <td>{{ subscriber.name|capitalize }}</td>
+
+                    <td title="{{ subscriber.email }}">
+                        <span class="fa fa-envelope text-secondary cursor-help"></span>
+                    </td>
+
+                    <td title="Click to update status">
+                        <form action="{{ path('app_admin_newsletter_subscriber_job_subscriber_store') }}" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <span class="pointer" onclick="this.closest('form').submit();">
+                                {% include 'admin/component/toggle.html.twig' with{flag:subscriber.isSubscribed} %}
+                            </span>
+                            <input type="hidden" name="isSubscribed"
+                                value="{{ subscriber.isSubscribed  ? 'on' : 'off' }}">
+                            <input type="hidden" name="id" value="{{ subscriber.id }}">
+                        </form>
+                    </td>
+
+                    <td>
+                        <small>{{ subscriber.hasReceived ? faCircle('text-success') : faCircle('text-light-50') }}</small>
+                    </td>
+
+                    <td><span title="{{ subscriber.updatedAt|date('Y-m-d H:i') }}">
+                            {{ timeAgo(subscriber.updatedAt) }}
+                        </span>
+                    </td>
+
+                    <td><span title="{{ subscriber.createdAt|date('Y-m-d H:i') }}">
+                            {{ timeAgo(subscriber.createdAt) }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a class="text-secondary" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v fa-sm"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" tabindex="-1"
+                                href="{{ path('app_admin_newsletter_subscriber_show', {id:subscriber.id}) }}">
+                                <span class="fa fa-edit text-secondary fa-xs pr-2"></span>
+                                <span class="font-size-14">Edit</span>
+                            </a>
+                        </div>
+                        {% else %}
+                        {% include 'admin/component/info/no_permission.html.twig' %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    {% include 'admin/component/pagination/links.html.twig' with {'uri': app.request.get('_route')} %}
+</div>
+
+{% else %}
+{% include 'admin/component/info/no_data_found.html.twig' %}
+{% endif %}

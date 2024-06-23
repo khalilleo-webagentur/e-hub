@@ -1,0 +1,68 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %} Dashboard - Neswletters {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 class="m-0 text-dark">Neswletters</h5>
+                </div>
+                <div class="col-sm-6">
+
+                    <ol class="breadcrumb text-end fs-15">
+                        {% if newsletters is defined and newsletters and is_granted('ROLE_SUPER_ADMIN')%}
+                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#addModal">
+                            <span class="md-d-none pr-1">New</span> <span class="fa fa-plus fa-sm"></span> 
+                        </li>
+
+                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#exportModal">
+                            <span class="md-d-none pr-1">Export</span> <span class="fa fa-download fa-sm"></span>
+                        </li>
+
+                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#deleteAllPermanentlyModal"
+                            title="Delete All Newsletters Permanentelly"> 
+                            <span class="md-d-none pr-1">Delete</span> <span class="fa fa-trash fa-xs"></span>
+                        </li>
+
+                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#infoModal">
+                            <span class="md-d-none pr-1">Infos</span> <span class="fa fa-info-circle fa-sm"></span>
+                        </li>
+                        {% else %}
+
+                        <li class="text-primary pointer" data-toggle="modal" data-target="#addModal">
+                            <span class="md-d-none pr-1">Add Newsletter</span> <span class="fa fa-plus fa-sm"></span>
+                        </li>
+                        {% endif %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                {% include 'admin/newsletter/partial/table_content.html.twig' %}
+            </div>
+            <div class="row">
+                <section class="col-lg-7 connectedSortable"></section>
+                <section class="col-lg-5 connectedSortable"></section>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'admin/newsletter/modal/add_newsletter.html.twig' %}
+
+{% if newsletters is defined and newsletters %}
+{% include 'admin/newsletter/modal/export.html.twig' %}
+{% include 'admin/newsletter/modal/delete_all.html.twig' %}
+{% include 'admin/newsletter/modal/general_infos.html.twig' %}
+{% endif %}
+
+{% endblock %}

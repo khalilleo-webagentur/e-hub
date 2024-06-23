@@ -1,0 +1,6 @@
+<p class="{{ class is defined ? class : '' }}">
+    <a href="{{ routeName is defined ? path(routeName) : '#' }}" rel="nofollow,noindex">
+        <span class="fa fa-arrow-alt-circle-left text fa-sm mr-1"></span>
+        <span class="text">{{ linkText is defined and linkText ? linkText : 'Back'|trans }}</span>
+    </a>
+</p>

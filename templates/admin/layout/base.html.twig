@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="cf6f861916b2e16b2cf884a222ac134f2fb7620d" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="NO-CACHE">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta property="og:locale" content="de_DE" />
+
+    <title> {% block title %}{% endblock %} </title>
+
+    <meta content="noindex,nofollow" name="robots">
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="{{ asset('assets/favicon/browserconfig.xml') }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="{{appName()}}" name="application-name">
+    <meta content="#ffffff" name="msapplication-TileColor">
+    <meta content="#ffffff" name="theme-color">
+    <meta name="author" content="khalilleo Team">
+    <meta name="created" content="18-06-2024" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel='dns-prefetch' href='//www.ehub.khalilleo.com' />
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('lte/css/root.min.css?v=3.4.0')}}">
+    <link rel="stylesheet" href="{{asset('lte/css/app.css?v=1.0.0')}}">
+    <link rel="stylesheet" href="{{asset('lib/dropzone/dropzone.min.css?v=1.0.0')}}">
+
+    <link href="{{ asset('lib/quill/monokai-sublime.min.css?ver=1.0.0') }}" rel="stylesheet" />
+    <link href="{{ asset('lib/quill/quill.snow.css?ver=1.3.6') }}" rel="stylesheet" />
+    {% endblock %}
+    
+    <noscript>
+        <meta http-equiv="refresh" content="3;url=/{{path('app_noscript')}}">
+    </noscript>
+</head>
+<body>
+
+    <div class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+            {% include 'admin/layout/navbar.html.twig' %}
+            {% include 'component/lte_custom_type_message_top_fixed.html.twig' %}
+            {% include 'admin/layout/sidebar.html.twig' %}
+            {% block body %} {% endblock %}
+        </div>
+        {% include 'admin/layout/footer.html.twig' %}
+    </div>
+
+    {% block javascripts %}
+    <script src="{{asset('lte/js/root.min.js?v=3.4.0')}}"></script>
+    <script src="{{asset('lib/dropzone/dropzone.js?v=1.0.0')}}"></script>
+    <script src="{{asset('lte/js/app.js?v=1.0.0')}}"></script>
+    
+    <script type="application/javascript" charset="utf-8" src="{{ asset('lib/quill/highlight.min.js?ver=9.18.1') }}"></script>
+    <script type="application/javascript" charset="utf-8" src="{{ asset('lib/quill/quill.js?ver=1.3.6') }}"></script>
+    <script type="application/javascript" charset="utf-8" src="{{ asset('lib/quill/quill-config.js?ver=1.0.0') }}"></script>
+    {% endblock %}
+</body>
+</html>

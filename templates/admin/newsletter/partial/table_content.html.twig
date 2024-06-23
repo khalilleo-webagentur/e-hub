@@ -1,0 +1,64 @@
+{% if newsletters is defined and newsletters %}
+<div class="col-md-12">
+    <div class="card-body table-responsive bg-white p-0 mb-3">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr class="fs-14">
+                    <th>{{ 'Title'|trans }}</th>
+                    <th>{{ 'isReadyToSend'|trans }}</th>
+                    <th>{{ 'isSent'|trans }}</th>
+                    <th>{{ 'Modified'|trans }}</th>
+                    <th>{{ 'Created'|trans }}</th>
+                    <th>{{ 'Action'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for newsletter in newsletters %}
+
+                <tr class="table-text-color font-size-14">
+
+                    <td>
+                        <span class="{{newsletter.isSent ? 'del' : ''}}">{{ newsletter.title|capitalize }}</span>
+                    </td>
+
+                    <td>{{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-light-50') }}</td>
+
+                    <td>
+                        <small>{{ newsletter.isSent ? faThumbsUp() : faThumbsDown() }}</small>
+                    </td>
+
+                    <td><span title="{{ newsletter.updatedAt|date('Y-m-d H:i') }}">
+                            {{ timeAgo(newsletter.updatedAt) }}
+                        </span>
+                    </td>
+
+                    <td><span title="{{ newsletter.createdAt|date('Y-m-d H:i') }}">
+                            {{ timeAgo(newsletter.createdAt) }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a class="text-secondary" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v fa-sm"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" tabindex="-1" href="{{ path('app_admin_newsletter_show', {id:newsletter.id}) }}">
+                                <span class="fa fa-edit text-secondary fa-xs pr-2"></span>                         
+                            <span class="font-size-14">Edit</span>                         
+                            </a>
+                        </div>
+                        {% else %}
+                        {% include 'admin/component/info/no_permission.html.twig' %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+{% include 'admin/component/info/no_data_found.html.twig' %}
+{% endif %}

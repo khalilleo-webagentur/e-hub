@@ -1,0 +1,41 @@
+<section class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-4 alert-fixed-z-index">
+            {# warning #}
+            {% if error is defined and error %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <img src="{{ asset('assets/img/svg/exclamation-triangle.svg') }}" alt="Warning" width="15" height="15"
+                    style="margin-top: -4px;"> {{ error.messageKey|trans(error.messageData, 'security') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <img src="{{ asset('assets/img/svg/exclamation-triangle.svg') }}" alt="Warning" width="15" height="15"
+                    style="margin-top: -4px;"> {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+
+            {# notice #}
+            {% for message in app.flashes('notice') %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <img src="{{ asset('assets/img/svg/exclamation-circle.svg') }}" alt="Warning" width="15" height="15"
+                    style="margin-top: -4px;"> {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+
+            {# success #}
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <img src="{{ asset('assets/img/svg/check2-circle.svg') }}" alt="Warning" width="15" height="15"
+                    style="margin-top: -4px;"> {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
