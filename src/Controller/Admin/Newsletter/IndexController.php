@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/newsletter')]
-class NewsletterController extends AbstractBaseController
+class IndexController extends AbstractBaseController
 {
    use FormValidationTrait;
 

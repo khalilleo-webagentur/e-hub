@@ -58,7 +58,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    {% include 'admin/newsletter/subscriber/partial/table_content.html.twig' %}
+                    {% include 'admin/subscriber/partial/table_content.html.twig' %}
                 </div>
             </div>
 
@@ -71,14 +71,14 @@
 </div>
 
 
-{% include 'admin/newsletter/subscriber/modal/import.html.twig' %}
+{% include 'admin/subscriber/modal/import.html.twig' %}
 
 {% if subscribers is defined and subscribers %}
-{% include 'admin/newsletter/subscriber/modal/reset_receiver.html.twig' %}
-{% include 'admin/newsletter/subscriber/modal/export.html.twig' %}
-{% include 'admin/newsletter/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
-{% include 'admin/newsletter/subscriber/modal/delete_all.html.twig' %}
-{% include 'admin/newsletter/subscriber/modal/general_infos.html.twig' %}
+{% include 'admin/subscriber/modal/reset_receiver.html.twig' %}
+{% include 'admin/subscriber/modal/export.html.twig' %}
+{% include 'admin/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
+{% include 'admin/subscriber/modal/delete_all.html.twig' %}
+{% include 'admin/subscriber/modal/general_infos.html.twig' %}
 {% endif %}
 
 {% endblock %}

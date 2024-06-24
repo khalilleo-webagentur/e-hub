@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Newsletter;
+namespace App\Controller\Admin\Subscriber;
 
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\SubscriberService;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/subscriber')]
-class SubscribersController extends AbstractBaseController
+class IndexController extends AbstractBaseController
 {
     use FormValidationTrait;
 
@@ -50,7 +50,7 @@ class SubscribersController extends AbstractBaseController
 
         $pagination = $paginationService->paginate($allSubscribers, $page, $limit);
 
-        return $this->render('admin/newsletter/subscriber/index.html.twig', [
+        return $this->render('admin/subscriber/index.html.twig', [
             'profile' => [],
             'notifications' => [],
             'subscribers' => $subscribers,
@@ -84,7 +84,7 @@ class SubscribersController extends AbstractBaseController
 
         $isSubscriberInBlackList = true;
 
-        return $this->render('admin/newsletter/subscriber/edit.html.twig', [
+        return $this->render('admin/subscriber/edit.html.twig', [
             'subscriber' => $subscriber,
             'profile' => [],
             'notifications' => [],

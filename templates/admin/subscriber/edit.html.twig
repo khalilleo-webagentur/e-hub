@@ -146,8 +146,4 @@
     </section>
 </div>
 
-{% if subscriber is defined and subscriber and is_granted('ROLE_SUPER_ADMIN') %}
-{% include 'admin/newsletter/subscriber/modal/add_to_blacklist.html.twig' with{id:subscriber.id} %}
-{% endif %}
-
 {% endblock %}

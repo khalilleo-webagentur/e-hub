@@ -26,7 +26,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            {% include 'admin/newsletter/subscriber/partial/table_content.html.twig' %}
+            {% include 'admin/subscriber/partial/table_content.html.twig' %}
         </div>
 
         <div class="row">
@@ -37,7 +37,7 @@
 </section>
 
 {% if subscribers is defined and subscribers %}
-{% include 'admin/newsletter/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
+{% include 'admin/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
 {% endif %}
 
 {% endblock %}

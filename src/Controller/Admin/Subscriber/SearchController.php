@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Newsletter;
+namespace App\Controller\Admin\Subscriber;
 
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\SubscriberService;
@@ -50,7 +50,7 @@ class SearchController extends AbstractBaseController
 
         $subscribers = $this->newsletterService->search($keyword);
 
-        return $this->render('admin/newsletter/subscriber/search.html.twig', [
+        return $this->render('admin/subscriber/search.html.twig', [
             'subscribers' => $subscribers,
             'profile' => [],
             'notifications' => [],

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Newsletter;
+namespace App\Controller\Admin\Subscriber;
 
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\Import\SubscriberImportService;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/newsletter/import')]
+#[Route('/admin/subscribers/import')]
 class ImportController extends AbstractBaseController
 {
     use FormValidationTrait;
