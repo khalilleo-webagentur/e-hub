@@ -85,7 +85,7 @@
                             {{ newsletter.title }} # {{ newsletter.id }}
                         </p>
     
-                        <p><span class="text-bold mr-2">{{ 'Newsletter Content'|trans }}:</span>{{ newsletter.content }}</p>
+                        <p><span class="text-bold mr-2">{{ 'Newsletter Content'|trans }}:</span>{{ newsletter.content|raw }}</p>
     
                         <p><span class="text-bold mr-2">{{ 'Can be published'|trans }}:</span>
                             {{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-danger') }}

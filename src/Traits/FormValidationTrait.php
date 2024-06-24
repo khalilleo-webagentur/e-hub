@@ -62,7 +62,7 @@ trait FormValidationTrait
         }
 
         if ($isRaw) {
-            return nl2br($input);
+            return $input;
         }
 
         return $this->limitWords($this->escape($input), 50000);

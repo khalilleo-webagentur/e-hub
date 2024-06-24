@@ -56,7 +56,6 @@ class TwigHelper extends AbstractExtension
     //     return sprintf($this->translator->trans($message, ['locale' => $locale]), $param);
     // }
 
-
     public function dash(): string
     {
         return '---';

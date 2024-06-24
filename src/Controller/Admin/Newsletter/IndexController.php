@@ -53,7 +53,7 @@ class IndexController extends AbstractBaseController
       $this->denyAccessUnlessGrantedRoleAdmin();
 
       $title = $this->validate($request->request->get('title'));
-      $content = $this->validateTextarea($request->request->get('content'));
+      $content = $this->validateTextarea($request->request->get('content'), true);
       $canBePublished = $this->validateCheckbox($request->request->get('canBePublished'));
 
       if ($canBePublished) {
@@ -124,7 +124,7 @@ class IndexController extends AbstractBaseController
       }
 
       $title = $this->validate($request->request->get('title'));
-      $content = $this->validate($request->request->get('content'));
+      $content = $this->validateTextarea($request->request->get('content'), true);
 
       if (!$title || !$content) {
          $this->addFlash('warning', 'Fields with star (*) are required');
