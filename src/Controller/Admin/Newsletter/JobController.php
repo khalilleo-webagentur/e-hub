@@ -6,6 +6,7 @@ namespace App\Controller\Admin\Newsletter;
 
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\NewsletterService;
+use App\Service\NewsletterSubscriberService;
 use App\Service\UserService;
 use App\Traits\FormValidationTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,7 +23,8 @@ class JobController extends AbstractBaseController
 
     public function __construct(
         private readonly UserService $userService,
-        private readonly NewsletterService $newsletterService
+        private readonly NewsletterService $newsletterService,
+        private readonly NewsletterSubscriberService $newsletterSubscriberService
     ) {
     }
 
@@ -48,15 +50,13 @@ class JobController extends AbstractBaseController
         if ($newsletters = $this->newsletterService->getAll()) {
 
             foreach ($newsletters as $newsletter) {
+                $this->newsletterSubscriberService->deleteByNewsletter($newsletter);
                 $this->newsletterService->delete($newsletter);
                 $count++;
             }
         }
 
-        $this->addFlash(
-            'success',
-            sprintf('Newsletters has been deleted permanently [%s]', $count)
-        );
+        $this->addFlash('success', sprintf('Newsletters has been deleted permanently [%s]', $count));
 
         return $this->redirectToRoute(self::ADMIN_NEWSLETTER_ROUTE_INDEX);
     }

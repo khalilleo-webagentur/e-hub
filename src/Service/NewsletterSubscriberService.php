@@ -12,8 +12,17 @@ use DateTime;
 
 final class NewsletterSubscriberService
 {
-    public function __construct(private readonly NewsletterSubscriberRepository $newsletterSubscriberRepository)
+    public function __construct(
+        private readonly NewsletterSubscriberRepository $newsletterSubscriberRepository
+    ) {
+    }
+
+    /**
+     * @return NewsletterSubscriber[]
+     */
+    public function getAllByNewsletter(Newsletter $newsletter): array
     {
+        return $this->newsletterSubscriberRepository->findBy(['newsletter' => $newsletter]);
     }
 
     /**
@@ -33,5 +42,17 @@ final class NewsletterSubscriberService
             ->setSentAt(new DateTime());
 
         $this->newsletterSubscriberRepository->save($model, true);
+    }
+
+    public function deleteByNewsletter(Newsletter $newsletter): void
+    {
+        foreach ($this->getAllByNewsletter($newsletter) as $row) {
+            $this->delete($row);
+        }
+    }
+
+    public function delete(NewsletterSubscriber $model): void
+    {
+        $this->newsletterSubscriberRepository->remove($model, true);
     }
 }

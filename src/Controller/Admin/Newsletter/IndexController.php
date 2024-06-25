@@ -6,6 +6,7 @@ namespace App\Controller\Admin\Newsletter;
 
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\NewsletterService;
+use App\Service\NewsletterSubscriberService;
 use App\Traits\FormValidationTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class IndexController extends AbstractBaseController
 
    public function __construct(
       private readonly NewsletterService $newsletterService,
+      private readonly NewsletterSubscriberService $newsletterSubscriberService
    ) {
    }
 
@@ -118,6 +120,7 @@ class IndexController extends AbstractBaseController
       }
 
       if ($this->validateCheckbox($request->request->get('delete'))) {
+         $this->newsletterSubscriberService->deleteByNewsletter($newsletter);
          $this->newsletterService->delete($newsletter);
          $this->addFlash('success', 'Newsletter has been deleted permanentelly');
          return $this->redirectToRoute(self::ADMIN_NEWSLETTER_ROUTE_INDEX);
