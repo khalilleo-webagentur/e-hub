@@ -46,7 +46,11 @@ class SendNeswletterController extends AbstractBaseController
         $subscriber = $this->subscriberService->getOneTheReceiveNewsletter();
 
         if (!$subscriber) {
+            
+            $this->newsletterService->updateStatusIsSentAndCanBePublished($newsletter);
+            $this->subscriberService->resetReceivedForSubscribers();
             $this->monolog->logger->notice('No active subscribers found.');
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -69,13 +73,6 @@ class SendNeswletterController extends AbstractBaseController
             );
 
             return new Response('Content has been sent.');
-        }
-
-        if ($this->newsletterService->updateIsSentAndCanBePublished()) {
-            $this->subscriberService->resetReceivedForSubscribers();
-            $this->monolog->logger->notice(
-                'Newsletter sending emails has been done and the flag hasReceived by subcribers set to false.'
-            );
         }
 
         return new Response('...');

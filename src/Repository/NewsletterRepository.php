@@ -21,6 +21,15 @@ class NewsletterRepository extends ServiceEntityRepository
         parent::__construct($registry, Newsletter::class);
     }
 
+    public function save(Newsletter $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     public function createOrUpdate(Newsletter $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

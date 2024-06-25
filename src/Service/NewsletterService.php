@@ -40,31 +40,18 @@ final class NewsletterService
         return $this->newsletterRepository->findAllOrderByDesc();
     }
 
-    public function updateIsSentAndCanBePublished(): bool
+    public function updateStatusIsSentAndCanBePublished(Newsletter $newsletter): void
     {
-        $isDone = false;
+        $newsletter
+            ->setIsSent(true)
+            ->setCanBePublished(false);
 
-        if ($newsletter = $this->getByCanBePublished()) {
-            $newsletter
-                ->setIsSent(true)
-                ->setCanBePublished(false)
-                ->setUpdatedAt(new DateTime());
-
-            $this->newsletterRepository->createorupdate($newsletter, true);
-
-            $isDone = true;
-        }
-
-        return $isDone;
+        $this->save($newsletter);
     }
 
     public function updateCanBePublished(Newsletter $newsletter, bool $canBePublished): Newsletter
     {
-        $newsletter
-            ->setCanBePublished($canBePublished)
-            ->setUpdatedAt(new DateTime());
-
-        $this->newsletterRepository->createorupdate($newsletter, true);
+        $this->save($newsletter->setCanBePublished($canBePublished));
 
         return $newsletter;
     }
@@ -78,11 +65,7 @@ final class NewsletterService
 
     public function updateToken(Newsletter $newsletter, string $token): Newsletter
     {
-        $newsletter
-            ->setToken($token)
-            ->setUpdatedAt(new DateTime());
-
-        $this->newsletterRepository->createorupdate($newsletter, true);
+        $this->save($newsletter->setToken($token));
 
         return $newsletter;
     }
@@ -110,9 +93,17 @@ final class NewsletterService
             ->setToken($token)
             ->setUpdatedAt(new DateTime());
 
-        $this->newsletterRepository->createorupdate($newsletter, true);
+        $this->save($newsletter, true);
 
         return $newsletter;
+    }
+
+    public function save(Newsletter $newsletter): void
+    {
+        $this->newsletterRepository->save(
+            $newsletter->setUpdatedAt(new DateTime()),
+            true
+        );
     }
 
     public function delete(Newsletter $newsletter): void
