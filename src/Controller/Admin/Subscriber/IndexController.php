@@ -51,8 +51,6 @@ class IndexController extends AbstractBaseController
         $pagination = $paginationService->paginate($allSubscribers, $page, $limit);
 
         return $this->render('admin/subscriber/index.html.twig', [
-            'profile' => [],
-            'notifications' => [],
             'subscribers' => $subscribers,
             'pagination' => $pagination,
             'paginationLimit' => $limit,
@@ -82,13 +80,8 @@ class IndexController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_NEWSLETTER_SUBSCIRBERS_ROUTE);
         }
 
-        $isSubscriberInBlackList = true;
-
         return $this->render('admin/subscriber/edit.html.twig', [
             'subscriber' => $subscriber,
-            'profile' => [],
-            'notifications' => [],
-            'isSubscriberInBlackList' => $isSubscriberInBlackList,
         ]);
     }
 
