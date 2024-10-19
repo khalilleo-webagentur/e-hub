@@ -7,6 +7,7 @@ namespace App\Controller\Admin\Subscriber;
 use App\Controller\Admin\AbstractBaseController;
 use App\Service\SubscriberService;
 use App\Service\Core\PaginationService;
+use App\Service\UserSettingService;
 use App\Traits\FormValidationTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ class IndexController extends AbstractBaseController
 
     public function __construct(
         private readonly SubscriberService $subscriberService,
+        private readonly UserSettingService $userSettingService
     ) {
     }
 
@@ -40,7 +42,9 @@ class IndexController extends AbstractBaseController
             return $this->redirectToRoute(self::PAGE_NOT_FOUND_ROUTE_INDEX);
         }
 
-        $limit = 8;
+        $userSetting = $this->userSettingService->getByUser($user);
+
+        $limit = $userSetting->getPaginationLimit();
 
         $offset = $paginationService->getOffset($page, $limit);
 

@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: TempUser::class, mappedBy: 'user')]
     private Collection $tempUsers;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?UserSetting $userSetting = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime());
@@ -217,6 +220,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $tempUser->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserSetting(): ?UserSetting
+    {
+        return $this->userSetting;
+    }
+
+    public function setUserSetting(UserSetting $userSetting): static
+    {
+        // set the owning side of the relation if necessary
+        if ($userSetting->getUser() !== $this) {
+            $userSetting->setUser($this);
+        }
+
+        $this->userSetting = $userSetting;
 
         return $this;
     }

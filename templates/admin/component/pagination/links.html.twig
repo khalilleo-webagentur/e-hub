@@ -47,7 +47,7 @@
 <div class="col">
     <div class="text-muted float-right">
 
-        <form action="#" method="post">
+        <form action="{{path('app_admin_user_setting_store_limit')}}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <input type="hidden" value="{{ request_uri }}" name="uri">
 
