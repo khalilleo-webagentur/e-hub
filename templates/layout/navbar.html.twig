@@ -1,7 +1,7 @@
 <nav class="navbar bg-white">
   <div class="container-fluid">
     <a href="{{app.request.schemeAndHttpHost}}" class="navbar-brand">
-      <img src="{{asset('assets/img/logo.png')}}" alt="LOGO {{appName()}}" height="23"> {{appName()}}
+      <img src="{{asset('assets/img/logo.png')}}" alt="LOGO {{appName()}}" height="20"> {{appName()}}
     </a>
     <div class="d-flex">
       {% if is_granted('ROLE_USER') %}
@@ -10,7 +10,7 @@
           data-bs-display="static" aria-expanded="false">
           <span class="bi bi-person-circle pe-1"></span> {{app.user.name}}
         </button>
-        <ul class="dropdown-menu dropdown-menu-lg-end">
+        <ul class="dropdown-menu dropdown-menu-lg-end fs-15">
           <li><a href="{{path('app_home')}}" class="dropdown-item" type="button">
               <span class="bi bi-house pe-1"></span> Home</a>
           </li>

@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark">Edit User Details</h4>
+                    <h5 class="text-dark">Edit User Details</h5>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <section class="content">
+    <section class="content bg-white py-3">
         <div class="container-fluid">
 
             <div class="row">
@@ -70,9 +70,7 @@
                         </div>
 
                         <div class="my-3">
-                            <button class="btn btn-success">Save Changes<span
-                                    class="fa fa-check-circle fa-sm pl-1"></span>
-                            </button>
+                            {% include 'admin/component/button/default_edit_btn.html.twig' %}
                         </div>
                     </form>
                 </div>

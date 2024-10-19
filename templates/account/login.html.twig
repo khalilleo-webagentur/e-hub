@@ -10,14 +10,13 @@
             <div class="col-lg-4 pt-5">
                 <div class="d-border p-4">
 
-                    <div class="text-center pt-3">
-                        <a href="{{app.request.schemeAndHttpHost}}">
-                            <img src="{{asset('assets/img/logo.png')}}" alt="{{appName()}}" height="50">
-                        </a>
+                    <div class="text-center pt-2">
+                       
+                        {% include 'component/form_logo.html.twig' %}
 
-                        <h3 class="my-1 text-center text-dark-50">Sign In</h3>
+                        <h4 class="my-2 text-center text-dark-50">Sign In</h4>
 
-                        <p class="text-center text-dark-50 mb-3">
+                        <p class="text-center text-dark-50 mb-3 fs-15">
                             Enter your OTP to continue.
                         </p>
                     </div>
@@ -44,7 +43,7 @@
                         </div>
                     </form>
 
-                    <div class="my-3 pt-3 text-center">
+                    <div class="my-3 pt-3 text-center fs-15">
                         <p class="text-dark-50">No OTP yet? <a href="{{path('app_auth')}}"
                                 class="d-color text-decoration-none">
                                 Request new one!</a>

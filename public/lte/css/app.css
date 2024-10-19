@@ -19,8 +19,8 @@ label, label:not(.form-check-label):not(.custom-file-label){
 
 .btn {
     text-transform: capitalize;
-    border-radius: 50px;
-    padding: 10px 20px;
+    border-radius: 5px;
+    padding: 8px 16px;
     font-size: 15px;
 }
 
@@ -29,6 +29,11 @@ label, label:not(.form-check-label):not(.custom-file-label){
     border-radius: 3px;
     padding: 6px 10px;
     font-size: 15px;
+}
+
+label {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .modal-title-upper {
@@ -94,7 +99,7 @@ body {
 
 .d-btn {
     border: 1px solid #d0d0d0;
-    background-color: #ddddddcc;
+    background-color: #fff;
     color: #454545a1 !important;
     border-radius: 3px;
     padding: 0 12px;
@@ -105,6 +110,9 @@ body {
     color: #fff !important;
     border: 1px solid #e8e4e48f;
     background-color: #343536b7;
+}
+.content-header {
+    padding: 13px 10px 5px 15px;
 }
 
 .del {

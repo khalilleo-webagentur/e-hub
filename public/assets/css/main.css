@@ -78,7 +78,8 @@ input[type="color"]:focus,
 }
 
 .d-border {
-    border: 1px solid #5b5b5b47;
+    border: 1px solid #d1d1d165;
+    border-radius: 7px;
 }
 
 .pointer {

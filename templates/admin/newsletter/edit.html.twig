@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark">Edit Newsletter Details</h4>
+                    <h5 class="m-0 text-dark">Edit Newsletter Details</h5>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -74,6 +74,7 @@
                         </div>
     
                         {% include 'admin/component/button/default_edit_btn.html.twig' %}
+                        
                         <input type="hidden" value="{{ newsletter.id }}" name="id">
                         <input type="hidden" value="{{newsletter.token}}" name="token">
                         <input type="hidden" value="{{newsletter.isSent ? 'on' : 'off'}}" name="isSent">

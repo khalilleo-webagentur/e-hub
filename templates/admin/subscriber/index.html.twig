@@ -10,10 +10,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4">
-                    <h5 class="m-0 text-dark mt-1">Subscribers</h5>
+                    <h5 class="text-dark pt-1">Subscribers</h5>
                 </div>
                 <div class="col-sm-8">
-                    <ol class="breadcrumb text-end fs-15">
+                    <ol class="breadcrumb text-end fs-15 pb-2">
                         {% if subscribers is defined and subscribers and is_granted('ROLE_SUPER_ADMIN')%}
 
                         <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#resetModal">

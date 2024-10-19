@@ -10,12 +10,10 @@
             <div class="col-lg-4 pt-5">
                 <div class="d-border p-4">
 
-                    <div class="text-center pt-3">
-                        <a href="{{app.request.schemeAndHttpHost}}">
-                            <img src="{{asset('assets/img/logo.png')}}" alt="{{appName()}}" height="50">
-                        </a>
-                        <h3 class="my-1 text-center text-dark-50">Get Started</h3>
-                        <p class="text-center text-dark-50 mb-3">Sign up with work email</p>
+                    <div class="text-center pt-2">
+                        {% include 'component/form_logo.html.twig' %}
+                        <h4 class="my-2 text-center text-dark-50">Get Started</h4>
+                        <p class="text-center text-dark-50 mb-3 fs-15">Sign up with work email</p>
                     </div>
 
                     {% include 'component/form_alert.html.twig' %}
@@ -36,12 +34,10 @@
                         </div>
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input"
-                                style="background-color: #0000001c;border: 1px solid #535353;" type="checkbox"
-                                name="confirm" required id="confirm">
-                            <label class="form-check-label text-dark-50" for="confirm">
+                            <input class="form-check-input" type="checkbox" name="confirm" required id="confirm">
+                            <label class="form-check-label text-secondary" for="confirm">
                                 I accept {{appName()}}'s <a href="{{path('app_legal_privacy_policy')}}"
-                                    class="text-dark-50" rel="nofollow">
+                                    class="text-decoration-none text-success" rel="nofollow">
                                     Privacy Policy
                                 </a>
                             </label>
@@ -54,7 +50,7 @@
                         </div>
                     </form>
 
-                    <div class="my-3 text-center">
+                    <div class="my-3 text-center fs-15">
                         <p class="text-dark-50"> Already have an account?
                             <a href="{{path('app_login')}}" class="d-color text-decoration-none">Login</a>
                         </p>
