@@ -17,8 +17,7 @@ final class SendNewsletterMail extends AbstractMail implements MailInterface
     public function __construct(
         private readonly MailerInterface $mailer,
         private readonly ConfigService $configService
-    ) {
-    }
+    ) {}
 
     public function send(...$context): void
     {
@@ -43,6 +42,10 @@ final class SendNewsletterMail extends AbstractMail implements MailInterface
                 'token' => $subToken,
                 'showUnSubscriptionLink' => true,
             ]);
+
+        $unSubscribeLink = sprintf('/un-subscribe/%s', $subToken);
+
+        DevMailer::catch($unSubscribeLink);
 
         DevMailer::catch(sprintf('Message has been sent to %s right now.', $subEmail));
 

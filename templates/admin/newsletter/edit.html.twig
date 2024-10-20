@@ -87,6 +87,13 @@
                         </p>
     
                         <p><span class="text-bold mr-2">{{ 'Newsletter Content'|trans }}:</span>{{ newsletter.content|raw }}</p>
+
+                        <p><span class="text-bold mr-2">Token:</span>
+                            <a href="{{app.request.schemeAndHttpHost}}/send/newsletter/{{newsletter.token}}"
+                                target="_blank">
+                                Visiting this Link will send the newsletter directly
+                            </a>
+                        </p>
     
                         <p><span class="text-bold mr-2">{{ 'Can be published'|trans }}:</span>
                             {{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-danger') }}

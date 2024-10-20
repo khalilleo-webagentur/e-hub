@@ -5,7 +5,13 @@
                 <span class="apple-link">&copy; {{ appName() }} {{ year() }} - {{ 'All Rights Reserved'|trans }} - 
                     {{ version() }}</span>
                 <br> {{ 'Have a question or need Help?'|trans }}
-                <a href="{{ absolute_url(path('app_home')) }}" rel="nofollow,noindex,noopnner"> {{'Contact Form'|trans }}</a>
+                <a href="{{ absolute_url(path('app_contact_us_index')) }}" rel="nofollow,noindex,noopnner"> {{'Contact Form'|trans }}</a>
+
+                {% if showUnSubscriptionLink is defined and showUnSubscriptionLink %}
+                <span class="ps-1 pe-1">|</span>
+                <a href="{{ absolute_url(path('app_home_newsletter_unsubscribe', {token: token})) }}">{{'Unsubscribe'|trans}}</a>
+                {% endif %}
+                
             </td>
         </tr>
         <tr>
