@@ -25,7 +25,7 @@ class IndexController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         return $this->render('profile/index.html.twig', [
-            'email' => $this->getParameter('info_emal'),
+            'email' => $this->getParameter('infoEmail'),
         ]);
     }
 }

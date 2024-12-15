@@ -24,9 +24,9 @@ final class ContactFormNewMessageMail extends AbstractMail implements MailInterf
 
     public function send(...$context): void
     {
-        $webmasterName = $this->configService->getParameter('webmaster_name');
+        $webmasterName = $this->configService->getParameter('webmasterName');
         
-        $webmasterEmail = $this->configService->getParameter('webmaster_email');
+        $webmasterEmail = $this->configService->getParameter('webmasterEmail');
 
         $email = (new TemplatedEmail())
             ->from(
