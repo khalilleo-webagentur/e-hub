@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'app:new-admin',
-    description: 'Add demo admin for demostration purposes.',
+    description: 'Add demo admin for demonstration purposes.',
     hidden: false
 )]
 class NewAdminCommand extends Command
