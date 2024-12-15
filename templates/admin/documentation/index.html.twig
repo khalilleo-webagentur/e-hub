@@ -1,0 +1,71 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid area-section">
+
+            <div class="row">
+                <div class="col-lg-12">
+                 <pre>
+                     <code>
+### CronJob
+
+[Cron Service Trusted by the Pros](https://www.easycron.com/)
+[Examples](https://cron.help/examples)
+[CronHowto](https://help.ubuntu.com/community/CronHowto)
+
+---
+
+* $ systemctl status cron
+* $ systemctl start cron
+* $ systemctl stop cron
+* $ apt-get install cron
+* $ crontab -e //add cron job
+* $ crontab -l : List the all your cron jobs.
+* $ crontab -r : Delete the current cron jobs.
+
+---
+
+- Every 5min.
+* * * * * curl --request POST 'http://localhost:8080/send/newsletter/xxxxxxxxxxxxxxxxxxxxx'
+---
+    * * * * * Every Minute
+    */5 * * * * Every Five Minutes
+    */10 * * * * Every 10 Minutes
+    */15 * * * * Every 15 Minutes
+    */30 * * * * Every 30 Minutes
+                     </code>
+                 </pre>
+                </div>
+            </div>
+
+            <div class="row">
+                <section class="col-lg-7 connectedSortable"></section>
+                <section class="col-lg-5 connectedSortable"></section>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
