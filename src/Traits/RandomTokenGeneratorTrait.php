@@ -24,7 +24,7 @@ trait RandomTokenGeneratorTrait
         try {
             return random_int(111111, 999999);
         } catch (Exception $e) {
-            return (int) str_shuffle('345987');
+            return (int)str_shuffle('345987');
         }
     }
 

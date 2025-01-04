@@ -1,152 +1,156 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block title %} {{appName()}} - E-mail Marketing {% endblock %}
+{% block title %} {{ appName() }} - E-mail Marketing {% endblock %}
 
 {% block body %}
 
-{% include 'layout/navbar.html.twig' %}
+    {% include 'layout/navbar.html.twig' %}
 
-{% include 'component/custom_type_message_top_fixed.html.twig' %}
+    {% include 'component/custom_type_message_top_fixed.html.twig' %}
 
-<div class="container-fluid bg-success shadow-sm">
-    <div class="container py-5">
-        <div class="row justify-content-center text-center" style="padding-top: 40px;padding-bottom: 40px;">
-            <div class="col-lg-7">
-                <h2 class="py-2 text-white">E-mail-Hub</h2>
-                <h6 class=" text-white py-3">Email marketing is indeed one of the most effective and popular marketing
-                    tools, with a high engagement rate and proven ROI for businesses.</h6>
-                <a href="{{path('app_register')}}" class="btn btn-lg btn-outline-light btn-lg fs-17 rounded-pill">Sign up for Free</a>
+    <div class="container-fluid bg-success shadow-sm">
+        <div class="container py-5">
+            <div class="row justify-content-center text-center" style="padding-top: 40px;padding-bottom: 40px;">
+                <div class="col-lg-7">
+                    <h2 class="py-2 text-white">E-mail-Hub</h2>
+                    <h6 class=" text-white py-3">Email marketing is indeed one of the most effective and popular
+                        marketing
+                        tools, with a high engagement rate and proven ROI for businesses.</h6>
+                    <a href="{{ path('app_register') }}" class="btn btn-lg btn-outline-light btn-lg fs-17">Sign up for
+                        Free</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container my-5 py-4">
+    <div class="container my-5 py-4">
 
-    <div class="row row-cols-1 row-cols-lg-3 g-3">
+        <div class="row row-cols-1 row-cols-lg-3 g-3">
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Cost-Effective Reach</h5>
-                    <p class="card-text text-secondary">
-                        Email marketing allows businesses to reach a large audience at a low cost, making it a
-                        cost-effective marketing strategy.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Cost-Effective Reach</h5>
+                        <p class="card-text text-secondary">
+                            Email marketing allows businesses to reach a large audience at a low cost, making it a
+                            cost-effective marketing strategy.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Personalized Communication</h5>
-                    <p class="card-text text-secondary">
-                        With email marketing, businesses can personalize messages based on customer preferences,
-                        increasing engagement and building stronger relationships.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Personalized Communication</h5>
+                        <p class="card-text text-secondary">
+                            With email marketing, businesses can personalize messages based on customer preferences,
+                            increasing engagement and building stronger relationships.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Measurable Results</h5>
-                    <p class="card-text text-secondary">
-                        Email marketing provides detailed analytics, allowing businesses to track open rates,
-                        click-through rates, and conversions to measure campaign success.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Measurable Results</h5>
+                        <p class="card-text text-secondary">
+                            Email marketing provides detailed analytics, allowing businesses to track open rates,
+                            click-through rates, and conversions to measure campaign success.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Targeted Campaigns</h5>
-                    <p class="card-text text-secondary">
-                        Email marketing enables businesses to segment their audience and send targeted campaigns to
-                        specific groups, increasing relevance and effectiveness.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Targeted Campaigns</h5>
+                        <p class="card-text text-secondary">
+                            Email marketing enables businesses to segment their audience and send targeted campaigns to
+                            specific groups, increasing relevance and effectiveness.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Increased Brand Awareness</h5>
-                    <p class="card-text text-secondary">
-                        Consistent email communication helps businesses stay top-of-mind with customers, leading to
-                        increased brand awareness and customer loyalty.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Increased Brand Awareness</h5>
+                        <p class="card-text text-secondary">
+                            Consistent email communication helps businesses stay top-of-mind with customers, leading to
+                            increased brand awareness and customer loyalty.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm pb-2">
-                <div class="card-body">
-                    <h5 class="card-title text-success py-2">Automation Efficiency</h5>
-                    <p class="card-text text-secondary">
-                        Email marketing automation streamlines processes, saving time and effort while delivering timely
-                        and relevant messages to customers.
-                    </p>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm pb-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-success py-2">Automation Efficiency</h5>
+                        <p class="card-text text-secondary">
+                            Email marketing automation streamlines processes, saving time and effort while delivering
+                            timely
+                            and relevant messages to customers.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 
-<div class="container-fulid bg-white mb-3 pb-3">
-    <div class="container pb-3">
-        <div class="row mt-5">
-            <div class="row py-5 text-center">
+    <div class="container-fulid bg-white mb-3 pb-3">
+        <div class="container pb-3">
+            <div class="row mt-5">
+                <div class="row py-5 text-center">
 
-                <div class="col-md-12">
-                    <h4>Do you have any questions?</h4>
-                    <p>Contact us personally or send us an e-mail, we will be happy to help you!</p>
+                    <div class="col-md-12">
+                        <h4>Do you have any questions?</h4>
+                        <p>Contact us personally or send us an e-mail, we will be happy to help you!</p>
+                    </div>
                 </div>
             </div>
+
+            <div class="row row-cols-1 row-cols-lg-3 g-3 text-center pt-1 pb-5 mb-3">
+                <div class="col">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="pt-1 text-success">
+                                <span class="bi bi-phone"></span> (+49) 163 / 616-53-96
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="pt-1 text-success">
+                                <span class="bi bi-envelope"></span> support@khalilleo.com
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="pt-1 text-success">
+                                <a href="{{ path('app_contact_us_index') }}"
+                                   class="text-success text-decoration-none"><span
+                                            class="bi bi-arrow-right-circle"></span> To the contat-us
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <div class="row row-cols-1 row-cols-lg-3 g-3 text-center pt-1 pb-5 mb-3">
-            <div class="col">
-                <div class="card border-success">
-                    <div class="card-body">
-                        <h6 class="pt-1 text-success">
-                            <span class="bi bi-phone"></span> (+49) 163 / 616-53-96
-                        </h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-success">
-                    <div class="card-body">
-                        <h6 class="pt-1 text-success">
-                            <span class="bi bi-envelope"></span> support@khalilleo.com
-                        </h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-success">
-                    <div class="card-body">
-                        <h6 class="pt-1 text-success">
-                            <a href="{{path('app_contact_us_index')}}" class="text-success text-decoration-none"><span
-                                    class="bi bi-arrow-right-circle"></span> To the contat-us
-                            </a>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
 
-{% include 'layout/footer.html.twig' %}
+    {% include 'layout/footer.html.twig' %}
 
 {% endblock %}

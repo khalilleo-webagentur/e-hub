@@ -11,7 +11,7 @@ final class ConfigService
 {
     public function __construct(
         private readonly ContainerInterface $container,
-        private readonly MonologService $monolog
+        private readonly MonologService     $monolog
     ) {
     }
 

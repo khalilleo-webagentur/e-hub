@@ -4,140 +4,151 @@
 
 {% block body %}
 
-<div class="content-wrapper">
+    <div class="content-wrapper">
 
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h5 class="m-0 text-dark">Edit Newsletter Details</h5>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        {% if newsletter is defined and newsletter %}
-                        <a href="{{ path('app_admin_newsletter_index') }}">
-                            <span class="fa fa-window-close fa-lg text-secondary pointer" title="{{ 'ESC'|trans }}"></span>
-                        </a>
-                        {% endif %}
-                    </ol>
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="m-0 text-dark">Edit Newsletter Details</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            {% if newsletter is defined and newsletter %}
+                                <a href="{{ path('app_admin_newsletter_index') }}">
+                                    <span class="fa fa-window-close fa-lg text-secondary pointer"
+                                          title="{{ 'ESC'|trans }}"></span>
+                                </a>
+                            {% endif %}
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                {% if newsletter is defined and newsletter and is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form class="pb-3" action="{{ path('app_admin_newsletter_store') }}" method="post">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <div class="form-group">
+                                    <label for="title">{{ 'Title'|trans }}: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                           placeholder="{{ 'Title (required)'|trans }}" value="{{ newsletter.title }}"
+                                           required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content">{{ 'Content'|trans }}: <span
+                                                class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="content" name="content"
+                                              placeholder="{{ 'Content (Required)'|trans }}" rows="5"
+                                              required>{{ newsletter.content }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="token">{{ 'Token'|trans }}:</label>
+                                    <input type="text" class="form-control" id="token" name="token"
+                                           placeholder="{{ dash() }}"
+                                           value="{{ newsletter.token }}" readonly>
+                                    <small class="text-muted">
+                                        {{ 'Token must not be empty for sending newsletter'|trans }}
+                                    </small>
+                                </div>
+
+                                <div class="form-group form-check">
+                                    <input type="checkbox"
+                                           class="form-check-input" {{ newsletter.canBePublished ? 'checked' : '' }}
+                                           id="canBePublished" name="canBePublished">
+                                    <label class="form-check-label"
+                                           for="canBePublished">{{ 'is ready to be send'|trans }}</label>
+                                </div>
+
+                                <div class="form-group form-check">
+                                    <input type="checkbox"
+                                           class="form-check-input" {{ newsletter.isSent ? 'checked' : '' }}
+                                           id="isSent" disabled>
+                                    <label class="form-check-label" for="isSent">{{ 'is being sent'|trans }}</label>
+                                </div>
+
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="delete" name="delete">
+                                    <label class="form-check-label" for="delete">
+                                        {{ 'delete this newsletter permanentelly'|trans }}
+                                    </label>
+                                </div>
+
+                                {% include 'admin/component/button/default_edit_btn.html.twig' %}
+
+                                <input type="hidden" value="{{ newsletter.id }}" name="id">
+                                <input type="hidden" value="{{ newsletter.token }}" name="token">
+                                <input type="hidden" value="{{ newsletter.isSent ? 'on' : 'off' }}" name="isSent">
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mt-3 bg-white pl-3 pr-3 pt-3 pb-3">
+                                <p><span class="text-bold mr-2">{{ 'Name'|trans }}:</span>
+                                    {{ newsletter.title }} # {{ newsletter.id }}
+                                </p>
+
+                                <p>
+                                    <span class="text-bold mr-2">{{ 'Newsletter Content'|trans }}:</span>{{ newsletter.content|raw }}
+                                </p>
+
+                                <p><span class="text-bold mr-2">Token:</span>
+                                    <a href="{{ app.request.schemeAndHttpHost }}/send/newsletter/{{ newsletter.token }}"
+                                       target="_blank">
+                                        Visiting this Link will send the newsletter directly
+                                    </a>
+                                </p>
+
+                                <p><span class="text-bold mr-2">{{ 'Can be published'|trans }}:</span>
+                                    {{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-danger') }}
+
+                                    {% if newsletter.canBePublished %}
+                                        <small class="text-secondary pl-2">[means the newsletter will be published via
+                                            crons]</small>
+                                    {% else %}
+                                        <small class="text-secondary pl-2">[This content has been already
+                                            published]</small>
+                                    {% endif %}
+                                </p>
+
+                                <p><span class="text-bold mr-2">{{ 'Is Sent'|trans }}:</span>
+                                    {{ newsletter.isSent ? faCircle('text-success') : faCircle('text-danger') }}
+
+                                    {% if newsletter.isSent %}
+                                        <small class="text-secondary pl-2">[means it has been done]</small>
+                                    {% else %}
+                                        <small class="text-secondary pl-2">[means it is ready to be sent]</small>
+                                    {% endif %}
+                                </p>
+
+                                <p title="{{ newsletter.updatedAt|date('Y-m-d H:i:s') }}">
+                                    <span class="text-bold mr-2">{{ 'Updated at'|trans }}:</span>
+                                    {{ newsletter.updatedAt|date }}
+                                </p>
+
+                                <p title="{{ newsletter.createdAt|date('Y-m-d H:i:s') }}">
+                                    <span class="text-bold mr-2">{{ 'Created at'|trans }}:</span>
+                                    {{ newsletter.createdAt|date }}
+                                </p>
+                            </div>
+                            <div class="mt-3">
+                                {% include 'admin/component/route/back.html.twig' with {
+                                    routeName: 'app_admin_newsletter_index',
+                                    linkText: 'Back to Newsletter'|trans
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {% include 'admin/component/info/no_data_found.html.twig' %}
+                {% endif %}
+            </div>
+        </section>
     </div>
-
-    <section class="content">
-        <div class="container-fluid">
-            {% if newsletter is defined and newsletter and is_granted('ROLE_SUPER_ADMIN') %}
-            <div class="row">
-                <div class="col-lg-6">
-                    <form class="pb-3" action="{{path('app_admin_newsletter_store')}}" method="post">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        <div class="form-group">
-                            <label for="title">{{ 'Title'|trans }}: <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" name="title"
-                                placeholder="{{ 'Title (required)'|trans }}" value="{{ newsletter.title }}" required>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="content">{{ 'Content'|trans }}: <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="content" name="content"
-                                placeholder="{{ 'Content (Required)'|trans }}" rows="5"
-                                required>{{ newsletter.content }}</textarea>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="token">{{ 'Token'|trans }}:</label>
-                            <input type="text" class="form-control" id="token" name="token" placeholder="{{ dash() }}"
-                                value="{{ newsletter.token }}" readonly>
-                            <small class="text-muted">
-                                {{ 'Token must not be empty for sending newsletter'|trans }}
-                            </small>
-                        </div>
-    
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" {{ newsletter.canBePublished ? 'checked' : '' }}
-                                id="canBePublished" name="canBePublished">
-                            <label class="form-check-label" for="canBePublished">{{ 'is ready to be send'|trans }}</label>
-                        </div>
-    
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" {{ newsletter.isSent ? 'checked' : '' }}
-                                id="isSent" disabled>
-                            <label class="form-check-label" for="isSent">{{ 'is being sent'|trans }}</label>
-                        </div>
-    
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="delete" name="delete">
-                            <label class="form-check-label" for="delete">
-                                {{ 'delete this newsletter permanentelly'|trans }}
-                            </label>
-                        </div>
-    
-                        {% include 'admin/component/button/default_edit_btn.html.twig' %}
-                        
-                        <input type="hidden" value="{{ newsletter.id }}" name="id">
-                        <input type="hidden" value="{{newsletter.token}}" name="token">
-                        <input type="hidden" value="{{newsletter.isSent ? 'on' : 'off'}}" name="isSent">
-                    </form>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mt-3 bg-white pl-3 pr-3 pt-3 pb-3">
-                        <p><span class="text-bold mr-2">{{ 'Name'|trans }}:</span>
-                            {{ newsletter.title }} # {{ newsletter.id }}
-                        </p>
-    
-                        <p><span class="text-bold mr-2">{{ 'Newsletter Content'|trans }}:</span>{{ newsletter.content|raw }}</p>
-
-                        <p><span class="text-bold mr-2">Token:</span>
-                            <a href="{{app.request.schemeAndHttpHost}}/send/newsletter/{{newsletter.token}}"
-                                target="_blank">
-                                Visiting this Link will send the newsletter directly
-                            </a>
-                        </p>
-    
-                        <p><span class="text-bold mr-2">{{ 'Can be published'|trans }}:</span>
-                            {{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-danger') }}
-    
-                            {% if newsletter.canBePublished %}
-                            <small class="text-secondary pl-2">[means the newsletter will be published via crons]</small>
-                            {% else %}
-                            <small class="text-secondary pl-2">[This content has been already published]</small>
-                            {% endif %}
-                        </p>
-    
-                        <p><span class="text-bold mr-2">{{ 'Is Sent'|trans }}:</span>
-                            {{ newsletter.isSent ? faCircle('text-success') : faCircle('text-danger') }}
-    
-                            {% if newsletter.isSent %}
-                            <small class="text-secondary pl-2">[means it has been done]</small>
-                            {% else %}
-                            <small class="text-secondary pl-2">[means it is ready to be sent]</small>
-                            {% endif %}
-                        </p>
-    
-                        <p title="{{ newsletter.updatedAt|date('Y-m-d H:i:s') }}">
-                            <span class="text-bold mr-2">{{ 'Updated at'|trans }}:</span>
-                            {{ newsletter.updatedAt|date }}
-                        </p>
-    
-                        <p title="{{ newsletter.createdAt|date('Y-m-d H:i:s') }}">
-                            <span class="text-bold mr-2">{{ 'Created at'|trans }}:</span>
-                            {{ newsletter.createdAt|date }}
-                        </p>
-                    </div>
-                    <div class="mt-3">
-                        {% include 'admin/component/route/back.html.twig' with {
-                        routeName: 'app_admin_newsletter_index',
-                        linkText: 'Back to Newsletter'|trans
-                        } %}
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            {% include 'admin/component/info/no_data_found.html.twig' %}
-            {% endif %}
-        </div>
-    </section>
-</div>
 
 {% endblock %}

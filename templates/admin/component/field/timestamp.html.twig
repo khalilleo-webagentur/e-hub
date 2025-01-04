@@ -1,21 +1,23 @@
 {% if model is defined and model %}
-<div class="form-group">
-    <div class="row">
+    <div class="form-group">
+        <div class="row">
 
-        {% set hashId = hash() %}
-        <div class="form-group col">
-            <label for="{{hashId}}">{{ 'Modified'|trans }}: <span class="text-danger">*</span></label>
-            <input type="datetime" class="form-control dateTimePicker1" id="{{hashId}}" name="updated" placeholder="{{ 'Y-m-d H:i' }}"
-                value="{{ model.updatedAt|date('Y-m-d H:i') }}" required>
+            {% set hashId = hash() %}
+            <div class="form-group col">
+                <label for="{{ hashId }}">{{ 'Modified'|trans }}: <span class="text-danger">*</span></label>
+                <input type="datetime" class="form-control dateTimePicker1" id="{{ hashId }}" name="updated"
+                       placeholder="{{ 'Y-m-d H:i' }}"
+                       value="{{ model.updatedAt|date('Y-m-d H:i') }}" required>
+            </div>
+
+            {% set hashId = hash() %}
+            <div class="form-group col">
+                <label for="{{ hashId }}">{{ 'Created'|trans }}: <span class="text-danger">*</span></label>
+                <input type="datetime" class="form-control dateTimePicker2" id="{{ hashId }}" name="created"
+                       placeholder="{{ 'Y-m-d H:i:s' }}"
+                       value="{{ model.createdAt|date('Y-m-d H:i') }}" required>
+            </div>
+
         </div>
-
-        {% set hashId = hash() %}
-        <div class="form-group col">
-            <label for="{{hashId}}">{{ 'Created'|trans }}: <span class="text-danger">*</span></label>
-            <input type="datetime" class="form-control dateTimePicker2" id="{{hashId}}" name="created" placeholder="{{ 'Y-m-d H:i:s' }}"
-                value="{{ model.createdAt|date('Y-m-d H:i') }}" required>
-        </div>
-
     </div>
-</div>
 {% endif %}

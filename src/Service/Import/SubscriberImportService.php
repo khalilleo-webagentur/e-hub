@@ -15,7 +15,9 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
     private $subscribed = false;
     private $seberator = ';';
 
-    public function __construct(private readonly SubscriberService $subscriberService) {}
+    public function __construct(private readonly SubscriberService $subscriberService)
+    {
+    }
 
     public function fromJson(UploadedFile|array|null $file): int
     {
@@ -68,7 +70,7 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
 
             $data[] = $item;
         }
-        
+
         $count = 0;
 
         try {

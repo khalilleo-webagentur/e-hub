@@ -4,71 +4,71 @@
 
 {% block body %}
 
-{% include 'mails/layout/header.html.twig' %}
+    {% include 'mails/layout/header.html.twig' %}
 
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
-    <tr>
-        <td></td>
-        <td class="container">
-            <div class="content">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td></td>
+            <td class="container">
+                <div class="content">
 
-                <table role="presentation" class="main">
+                    <table role="presentation" class="main">
 
-                    <tr>
-                        <td class="wrapper">
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <p>Hi {{ username|capitalize }},</p>
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <p>Hi {{ username|capitalize }},</p>
 
-                                        <p>Thank you for signing up on {{ appName() }} to finish setting up your
-                                            account, please verify your email.</p>
+                                            <p>Thank you for signing up on {{ appName() }} to finish setting up your
+                                                account, please verify your email.</p>
 
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                            class="btn btn-primary">
-                                            <tbody>
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                   class="btn btn-primary">
+                                                <tbody>
                                                 <tr>
                                                     <td align="left">
                                                         <table role="presentation" border="0" cellpadding="0"
-                                                            cellspacing="0">
+                                                               cellspacing="0">
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="{{ absolute_url(path('app_register_verify_email', {token:token})) }}"
-                                                                            target="_blank">Verify Email</a>
-                                                                    </td>
-                                                                </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ absolute_url(path('app_register_verify_email', {token:token})) }}"
+                                                                       target="_blank">Verify Email</a>
+                                                                </td>
+                                                            </tr>
                                                             </tbody>
                                                         </table>
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
 
-                                        <p>Or you can confirm your email by clicking the following link:
-                                            <a href="{{ absolute_url(path('app_register_verify_email', {token:token})) }}"
-                                                target="_blank">
-                                                {{ absolute_url(path('app_register_verify_email', {token:token})) }}
-                                            </a>. <br> This link will expire in 30 minutes.
-                                        </p>
+                                            <p>Or you can confirm your email by clicking the following link:
+                                                <a href="{{ absolute_url(path('app_register_verify_email', {token:token})) }}"
+                                                   target="_blank">
+                                                    {{ absolute_url(path('app_register_verify_email', {token:token})) }}
+                                                </a>. <br> This link will expire in 30 minutes.
+                                            </p>
 
-                                        <p>If you did not request this, please ignore this email. Maybe someone has
-                                            mistyped his email.</p>
+                                            <p>If you did not request this, please ignore this email. Maybe someone has
+                                                mistyped his email.</p>
 
-                                        <p>Thanks, <br> The {{ appName() }} Team</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                                            <p>Thanks, <br> The {{ appName() }} Team</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-                </table>
+                    </table>
 
-                {% include 'mails/layout/footer.html.twig' %}
-            </div>
-        </td>
-        <td></td>
-    </tr>
-</table>
+                    {% include 'mails/layout/footer.html.twig' %}
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
 
 {% endblock %}

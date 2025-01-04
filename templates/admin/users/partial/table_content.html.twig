@@ -1,20 +1,20 @@
 <div class="card-body table-responsive bg-white p-0 mb-3">
     <table class="table table-hover text-nowrap">
         <thead>
-            <tr class="fs-14">
-                <th>#</th>
-                <th>{{ 'Name'|trans }}</th>
-                <th>{{ 'Email'|trans }}</th>
-                <th>{{ 'Token'|trans }}</th>
-                <th>{{ 'Verified'|trans }}</th>
-                <th>{{ 'Deleted'|trans }}</th>
-                <th>{{ 'Updated'|trans }}</th>
-                <th>{{ 'Created'|trans }}</th>
-                <th>{{ 'Action'|trans }}</th>
-            </tr>
+        <tr class="fs-14">
+            <th>#</th>
+            <th>{{ 'Name'|trans }}</th>
+            <th>{{ 'Email'|trans }}</th>
+            <th>{{ 'Token'|trans }}</th>
+            <th>{{ 'Verified'|trans }}</th>
+            <th>{{ 'Deleted'|trans }}</th>
+            <th>{{ 'Updated'|trans }}</th>
+            <th>{{ 'Created'|trans }}</th>
+            <th>{{ 'Action'|trans }}</th>
+        </tr>
         </thead>
         <tbody>
-            {% for row in users %}
+        {% for row in users %}
             <tr class="fs-14">
                 <td>{{ row.id }}</td>
                 <td>{{ row.name|capitalize }}</td>
@@ -28,12 +28,12 @@
                 <td title="{{ row.createdAt|date }}">{{ timeAgo(row.createdAt) }}</td>
 
                 <td>
-                    <a href="{{path('app_admin_user_edit', {id:row.id})}}">
+                    <a href="{{ path('app_admin_user_edit', {id:row.id}) }}">
                         <span class="fa fa-edit fa-sm"></span>
                     </a>
                 </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
 </div>

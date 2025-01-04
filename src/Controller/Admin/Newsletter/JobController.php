@@ -22,8 +22,8 @@ class JobController extends AbstractBaseController
     private const ADMIN_NEWSLETTER_SUBSCRIBERS_ROUTE_INDEX = 'app_admin_newsletter_subscribers_index';
 
     public function __construct(
-        private readonly UserService $userService,
-        private readonly NewsletterService $newsletterService,
+        private readonly UserService                 $userService,
+        private readonly NewsletterService           $newsletterService,
         private readonly NewsletterSubscriberService $newsletterSubscriberService
     ) {
     }

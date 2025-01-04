@@ -24,7 +24,7 @@ trait EmailAddressTrait
     private function getDomainFromEmailAddress(string $email): string
     {
         $temp = explode('@', $email);
-        
+
         return array_pop($temp);
     }
 }

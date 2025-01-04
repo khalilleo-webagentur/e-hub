@@ -152,14 +152,15 @@ final class SubscriberService
 
     public function update(
         Subscriber $subscriber,
-        string $name,
-        string $email,
-        string $token,
-        bool $isSubscribed,
-        bool $received,
-        string $updated,
-        string $created
-    ): Subscriber {
+        string     $name,
+        string     $email,
+        string     $token,
+        bool       $isSubscribed,
+        bool       $received,
+        string     $updated,
+        string     $created
+    ): Subscriber
+    {
 
         $subscriber
             ->setName($name)
@@ -198,7 +199,7 @@ final class SubscriberService
     public function import(string $name, string $email, bool $subscribed): void
     {
         $name = empty($name) ? $this->getNameFromEmailAddress($email) : $name;
-        
+
         $entity = new Subscriber();
         $entity
             ->setName($name)

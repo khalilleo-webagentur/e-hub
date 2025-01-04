@@ -27,9 +27,10 @@ class ImportController extends AbstractBaseController
 
     #[Route('/import-subscribers-data', name: 'app_admin_newsletter_subscribers_import', methods: 'POST')]
     public function import(
-        Request $request,
+        Request                 $request,
         SubscriberImportService $subscriberImportService
-    ): RedirectResponse {
+    ): RedirectResponse
+    {
 
         if (!$this->isCsrfTokenValid('authenticate', $this->validate($request->request->get('_csrf_token')))) {
             $this->addFlash('warning', 'CSRF Token is not valid.');

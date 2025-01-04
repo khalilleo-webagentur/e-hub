@@ -4,81 +4,89 @@
 
 {% block body %}
 
-<div class="content-wrapper">
+    <div class="content-wrapper">
 
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h5 class="text-dark pt-1">Subscribers</h5>
-                </div>
-                <div class="col-sm-8">
-                    <ol class="breadcrumb text-end fs-15 pb-2">
-                        {% if subscribers is defined and subscribers and is_granted('ROLE_SUPER_ADMIN')%}
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h5 class="text-dark pt-1">Subscribers</h5>
+                    </div>
+                    <div class="col-sm-8">
+                        <ol class="breadcrumb text-end fs-15 pb-2">
+                            {% if subscribers is defined and subscribers and is_granted('ROLE_SUPER_ADMIN') %}
 
-                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#resetModal">
-                            <span class="md-d-none pr-1">Reset</span> <span class="fa fa-flag fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#resetModal">
+                                    <span class="md-d-none pr-1">Reset</span> <span class="fa fa-flag fa-sm"></span>
+                                </li>
 
-                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#exportSubscribersModal">
-                            <span class="md-d-none pr-1">Export</span> <span class="fa fa-download fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                    data-target="#exportSubscribersModal">
+                                    <span class="md-d-none pr-1">Export</span> <span
+                                            class="fa fa-download fa-sm"></span>
+                                </li>
 
-                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#uploadModal">
-                            <span class="md-d-none pr-1">Import</span> <span class="fa fa-upload fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#uploadModal">
+                                    <span class="md-d-none pr-1">Import</span> <span class="fa fa-upload fa-sm"></span>
+                                </li>
 
-                        <li class="text-secondary pointer  d-btn" data-toggle="modal" data-target="#deleteAllSubscribersModal">
-                            <span class="md-d-none pr-1">Clean Up</span> <span class="fa fa-cog fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer  d-btn" data-toggle="modal"
+                                    data-target="#deleteAllSubscribersModal">
+                                    <span class="md-d-none pr-1">Clean Up</span> <span class="fa fa-cog fa-sm"></span>
+                                </li>
 
-                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#deleteAllPermanentlyModal">
-                            <span class="md-d-none pr-1">Delete All</span> <span class="fa fa-trash fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                    data-target="#deleteAllPermanentlyModal">
+                                    <span class="md-d-none pr-1">Delete All</span> <span
+                                            class="fa fa-trash fa-sm"></span>
+                                </li>
 
-                        <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#infoNewsletterModal">
-                            <span class="md-d-none pr-1">Infos</span> <span class="fa fa-info-circle fa-sm"></span>
-                        </li>
+                                <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                    data-target="#infoNewsletterModal">
+                                    <span class="md-d-none pr-1">Infos</span> <span
+                                            class="fa fa-info-circle fa-sm"></span>
+                                </li>
 
-                        {% else %}
+                            {% else %}
 
-                        <li class="text-primary pointer" data-toggle="modal" data-target="#uploadModal">
-                            <span class="md-d-none">Import Subscribers</span> <span class="fa fa-upload fa-sm"></span>
-                        </li>
+                                <li class="text-primary pointer" data-toggle="modal" data-target="#uploadModal">
+                                    <span class="md-d-none">Import Subscribers</span> <span
+                                            class="fa fa-upload fa-sm"></span>
+                                </li>
 
-                        {% endif %}
-                    </ol>
+                            {% endif %}
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include 'admin/subscriber/partial/table_content.html.twig' %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <section class="col-lg-7 connectedSortable"></section>
+                    <section class="col-lg-5 connectedSortable"></section>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <section class="content">
-        <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    {% include 'admin/subscriber/partial/table_content.html.twig' %}
-                </div>
-            </div>
+    {% include 'admin/subscriber/modal/import.html.twig' %}
 
-            <div class="row">
-                <section class="col-lg-7 connectedSortable"></section>
-                <section class="col-lg-5 connectedSortable"></section>
-            </div>
-        </div>
-    </section>
-</div>
-
-
-{% include 'admin/subscriber/modal/import.html.twig' %}
-
-{% if subscribers is defined and subscribers %}
-{% include 'admin/subscriber/modal/reset_receiver.html.twig' %}
-{% include 'admin/subscriber/modal/export.html.twig' %}
-{% include 'admin/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
-{% include 'admin/subscriber/modal/delete_all.html.twig' %}
-{% include 'admin/subscriber/modal/general_infos.html.twig' %}
-{% endif %}
+    {% if subscribers is defined and subscribers %}
+        {% include 'admin/subscriber/modal/reset_receiver.html.twig' %}
+        {% include 'admin/subscriber/modal/export.html.twig' %}
+        {% include 'admin/subscriber/modal/delete_subscribers_based_on_date_permanently.html.twig' %}
+        {% include 'admin/subscriber/modal/delete_all.html.twig' %}
+        {% include 'admin/subscriber/modal/general_infos.html.twig' %}
+    {% endif %}
 
 {% endblock %}

@@ -7,7 +7,7 @@ namespace App\Service\Core;
 use Khalilleo\Connector\PdoConnect;
 use Khalilleo\Connector\SqlOperation;
 
-final class SQLConnectorService 
+final class SQLConnectorService
 {
     public function target(string $targetTable): ?SqlOperation
     {

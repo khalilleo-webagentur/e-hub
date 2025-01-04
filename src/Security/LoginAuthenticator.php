@@ -28,9 +28,9 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly UserService $userService,
-        private readonly TwoFactorAuthService $twoFactorAuthService,
-        private readonly TempUserService $tempUserService
+        private readonly UserService           $userService,
+        private readonly TwoFactorAuthService  $twoFactorAuthService,
+        private readonly TempUserService       $tempUserService
     ) {
     }
 

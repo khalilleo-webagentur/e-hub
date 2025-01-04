@@ -3,27 +3,28 @@
 {% block title %} No-JS | Instructions to enable JavaScript {% endblock %}
 
 {% block body %}
-<div class="d-flex flex-column h-100">
+    <div class="d-flex flex-column h-100">
 
-    {% include 'layout/navbar_without.html.twig' %}
+        {% include 'layout/navbar_without.html.twig' %}
 
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col-md-12">
-                
-                <h3>Instructions to enable JavaScript</h3>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12">
 
-                <p>
-                    For full functionality of this site it is necessary to enable JavaScript. Please enable javascript
-                    on your Browser <br>
-                    <a href="https://www.enable-javascript.com/" rel="nofollow noindex"
-                        target="_blank">https://www.enable-javascript.com/</a>
-                </p>
+                    <h3>Instructions to enable JavaScript</h3>
+
+                    <p>
+                        For full functionality of this site it is necessary to enable JavaScript. Please enable
+                        javascript
+                        on your Browser <br>
+                        <a href="https://www.enable-javascript.com/" rel="nofollow noindex"
+                           target="_blank">https://www.enable-javascript.com/</a>
+                    </p>
+                </div>
             </div>
         </div>
+
+        {% include 'layout/footer_without.html.twig' %}
+
     </div>
-
-    {% include 'layout/footer_without.html.twig' %}
-
-</div>
 {% endblock %}

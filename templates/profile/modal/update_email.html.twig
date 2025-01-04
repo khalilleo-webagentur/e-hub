@@ -1,5 +1,5 @@
 <div class="modal fade" id="emailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="emailModalLabel" aria-hidden="true">
+     aria-labelledby="emailModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,12 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{path('app_profile_personal_data_email_store')}}" method="post">
+            <form action="{{ path('app_profile_personal_data_email_store') }}" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="iEmail" class="form-label text-dark-50">New Email:</label>
-                        <input type="text" class="form-control" id="iEmail" placeholder="{{app.user.email}}"
-                            name="iEmail" style="height: 42px; border-radius: 0;" required autofocus>
+                        <input type="text" class="form-control" id="iEmail" placeholder="{{ app.user.email }}"
+                               name="iEmail" style="height: 42px; border-radius: 0;" required autofocus>
                         <small class="text-secondary text-dark-50">This feld is required.</small>
                     </div>
                 </div>

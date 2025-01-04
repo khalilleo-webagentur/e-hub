@@ -72,12 +72,13 @@ final class NewsletterService
 
     public function createOrupdate(
         ?Newsletter $newsletter,
-        string $title,
-        string $content,
-        bool $canBePublished = false,
-        bool $isSent = false,
-        ?string $token = null
-    ): Newsletter {
+        string      $title,
+        string      $content,
+        bool        $canBePublished = false,
+        bool        $isSent = false,
+        ?string     $token = null
+    ): Newsletter
+    {
 
         if (empty($newsletter)) {
             $newsletter = new Newsletter();

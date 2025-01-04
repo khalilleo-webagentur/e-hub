@@ -11,7 +11,7 @@ final class PaginationService
     public function paginate(array $data, int $pageNumberFromRequest, int $limit, int $adjacent = 2): array
     {
         $total = count($data);
-        $totalPages = (int) ceil($total / $limit);
+        $totalPages = (int)ceil($total / $limit);
         $pageNumberFromRequest = $this->getPage($pageNumberFromRequest);
         $firstPage = $this->getFirstPage($totalPages, $adjacent, $pageNumberFromRequest);
 
@@ -25,8 +25,8 @@ final class PaginationService
             'limitToResetPagination' => 32,
             'padginationOptions' => [
                 8,
-                16, 
-                24, 
+                16,
+                24,
                 32,
                 1000
             ],

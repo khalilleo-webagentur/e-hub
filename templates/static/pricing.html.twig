@@ -4,31 +4,32 @@
 
 {% block body %}
 
-{% include 'layout/navbar.html.twig' %}
+    {% include 'layout/navbar.html.twig' %}
 
-<header style="padding-bottom: 180px;">
-    <div class="px-4 px-lg-5 pb-5">
-        <div class="row gx-4 gx-lg-5 h-100 justify-content-center py-3">
-            <div class="col-lg-12 text-center">
+    <header style="padding-bottom: 180px;">
+        <div class="px-4 px-lg-5 pb-5">
+            <div class="row gx-4 gx-lg-5 h-100 justify-content-center py-3">
+                <div class="col-lg-12 text-center">
 
-                <h3 class="d-color font-weight-bold my-5 pt-5">
-                    Pricing Plan
-                </h3>
+                    <h3 class="d-color font-weight-bold my-5 pt-5">
+                        Pricing Plan
+                    </h3>
 
-                <p class="text-white-50">
-                    It's free for 1 year with all features.
-                    <a href="{{path('app_register')}}" class="d-color">Sign Up</a> to enjoy all features.
-                </p>
+                    <p class="text-white-50">
+                        It's free for 1 year with all features.
+                        <a href="{{ path('app_register') }}" class="d-color">Sign Up</a> to enjoy all features.
+                    </p>
 
-                <p class="text-white-50">
-                    <a href="{{path('app_contact_us_index')}}" class="d-color">Contact us</a> for a self-hosting - all your data will be on your control. Any kind of queries related to that make a call.
-                </p>
+                    <p class="text-white-50">
+                        <a href="{{ path('app_contact_us_index') }}" class="d-color">Contact us</a> for a self-hosting -
+                        all your data will be on your control. Any kind of queries related to that make a call.
+                    </p>
 
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
-{% include 'layout/footer.html.twig' %}
+    {% include 'layout/footer.html.twig' %}
 
 {% endblock %}

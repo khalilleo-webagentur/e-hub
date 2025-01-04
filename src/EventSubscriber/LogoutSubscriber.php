@@ -31,7 +31,7 @@ class LogoutSubscriber implements EventSubscriberInterface
             $this->urlGenerator->generate('app_home'),
             RedirectResponse::HTTP_SEE_OTHER
         );
-        
+
         $event->setResponse($response);
     }
 }

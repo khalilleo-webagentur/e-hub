@@ -4,63 +4,63 @@
 
 {% block body %}
 
-{% include 'mails/layout/header.html.twig' %}
+    {% include 'mails/layout/header.html.twig' %}
 
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
-    <tr>
-        <td></td>
-        <td class="container">
-            <div class="content">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td></td>
+            <td class="container">
+                <div class="content">
 
-                <table role="presentation" class="main">
+                    <table role="presentation" class="main">
 
-                    <tr>
-                        <td class="wrapper">
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <p>Hi {{ username|capitalize }},</p>
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <p>Hi {{ username|capitalize }},</p>
 
-                                        <p>Your OTP (one time password) is:</p>
+                                            <p>Your OTP (one time password) is:</p>
 
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                            class="btn btn-primary">
-                                            <tbody>
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                   class="btn btn-primary">
+                                                <tbody>
                                                 <tr>
                                                     <td align="left">
                                                         <table role="presentation" border="0" cellpadding="0"
-                                                            cellspacing="0">
+                                                               cellspacing="0">
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="digits-code">
-                                                                            {{ otp }}
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="digits-code">
+                                                                        {{ otp }}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                             </tbody>
                                                         </table>
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
 
-                                        <p>Please do not share your OTP with anyone.</p>
+                                            <p>Please do not share your OTP with anyone.</p>
 
-                                        <p>Thanks, <br> The {{ appName() }} Team</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                                            <p>Thanks, <br> The {{ appName() }} Team</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-                </table>
+                    </table>
 
-                {% include 'mails/layout/footer.html.twig' %}
-            </div>
-        </td>
-        <td></td>
-    </tr>
-</table>
+                    {% include 'mails/layout/footer.html.twig' %}
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
 
 {% endblock %}

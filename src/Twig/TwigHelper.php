@@ -20,7 +20,7 @@ class TwigHelper extends AbstractExtension
         // private readonly TranslatorInterface $translator
     ) {
     }
-    
+
     public function getFunctions(): array
     {
         return [

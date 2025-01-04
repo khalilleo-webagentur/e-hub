@@ -136,16 +136,16 @@ trait FormValidationTrait
             return 0;
         }
 
-        return (int) $this->escape((string) $this->limitWords($input, 10));
+        return (int)$this->escape((string)$this->limitWords($input, 10));
     }
 
     private function validateFloat(mixed $input): float
     {
-        if (!is_numeric((float) $input) || !filter_var((float) $input, FILTER_VALIDATE_FLOAT)) {
+        if (!is_numeric((float)$input) || !filter_var((float)$input, FILTER_VALIDATE_FLOAT)) {
             return 0.0;
         }
 
-        return (float) $input;
+        return (float)$input;
     }
 
     private function validateArray(?array $inputs): array
@@ -183,7 +183,7 @@ trait FormValidationTrait
 
     private function limitWords(?string $input, int $length): string
     {
-        $inputAsInt = (int) $input;
+        $inputAsInt = (int)$input;
 
         if ($inputAsInt >= 2147483648) {
             return '';

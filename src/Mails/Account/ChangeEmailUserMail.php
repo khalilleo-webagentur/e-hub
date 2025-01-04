@@ -17,8 +17,8 @@ final class ChangeEmailUserMail extends AbstractMail implements MailInterface
 {
     public function __construct(
         private readonly MailerInterface $mailer,
-        private readonly ConfigService $configService,
-        private readonly MonologService $monolog
+        private readonly ConfigService   $configService,
+        private readonly MonologService  $monolog
     ) {
     }
 

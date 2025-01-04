@@ -1,5 +1,5 @@
 {% set hashId = hash() %}
-<button type="submit" class="btn btn-primary mt-2" id="{{btnId is defined and btnId ? btnId : hashId}}">
+<button type="submit" class="btn btn-primary mt-2" id="{{ btnId is defined and btnId ? btnId : hashId }}">
     <span class="fa fa-check pr-2"></span>
     {{ btnText is defined and btnText ? btnText : 'Save changes' }}
 </button>

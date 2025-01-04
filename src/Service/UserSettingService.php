@@ -13,7 +13,8 @@ final class UserSettingService
 {
     public function __construct(
         private readonly UserSettingRepository $userSettingRepository,
-    ) {}
+    ) {
+    }
 
     public function getById(int $id): ?UserSetting
     {

@@ -77,8 +77,7 @@ class SubscriberRepository extends ServiceEntityRepository
             ->andWhere('t1.updatedAt <= :modifier')
             ->setParameter('modifier', $modifier)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     /**

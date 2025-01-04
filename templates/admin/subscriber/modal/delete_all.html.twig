@@ -1,47 +1,47 @@
 {% if is_granted('ROLE_SUPER_ADMIN') %}
-<div class="modal fade" id="deleteAllPermanentlyModal" tabindex="-1" role="dialog"
-    aria-labelledby="deleteAllPermanentlyModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title modal-title-upper" id="deleteAllPermanentlyModalLabel">
-                    {{ 'Delete Subscribers'|trans }}
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ path('app_admin_newsletter_job_subscribers_delete_all') }}" method="post">
-
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-
-                        <p class="modal-warning">{{ 'Export subscribers before deleting them Permanently!'|trans }}</p>
-
-                        {% include 'admin/component/field/verify_password.html.twig' %}
-
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="subscribersCB" name="justInActive">
-                            <label class="form-check-label" for="subscribersCB">
-                                {{ 'Delete only in-active subscribers'|trans }}
-                            </label>
-                        </div>
-
-                        {% include 'admin/component/info/action_cannot_be_undone.html.twig' %}
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light cancel btn-radius-50" data-dismiss="modal">
-                        {{ 'Cancel'|trans }}
+    <div class="modal fade" id="deleteAllPermanentlyModal" tabindex="-1" role="dialog"
+         aria-labelledby="deleteAllPermanentlyModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title modal-title-upper" id="deleteAllPermanentlyModalLabel">
+                        {{ 'Delete Subscribers'|trans }}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
-                    <button type="submit" class="btn btn-danger btn-radius-50">{{ 'Delete them'|trans }}</button>
                 </div>
-            </form>
+                <form action="{{ path('app_admin_newsletter_job_subscribers_delete_all') }}" method="post">
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+
+                            <p class="modal-warning">{{ 'Export subscribers before deleting them Permanently!'|trans }}</p>
+
+                            {% include 'admin/component/field/verify_password.html.twig' %}
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="subscribersCB" name="justInActive">
+                                <label class="form-check-label" for="subscribersCB">
+                                    {{ 'Delete only in-active subscribers'|trans }}
+                                </label>
+                            </div>
+
+                            {% include 'admin/component/info/action_cannot_be_undone.html.twig' %}
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light cancel btn-radius-50" data-dismiss="modal">
+                            {{ 'Cancel'|trans }}
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-radius-50">{{ 'Delete them'|trans }}</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endif %}

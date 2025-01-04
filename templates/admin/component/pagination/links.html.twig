@@ -1,83 +1,86 @@
 {# Admin Pagination Links #}
 {% if pagination is defined and pagination %}
 
-{% set paginationLimit = paginationLimit is defined and paginationLimit ? paginationLimit : 8 %}
+    {% set paginationLimit = paginationLimit is defined and paginationLimit ? paginationLimit : 8 %}
 
-{% if pagination.totalPages is defined and pagination.totalPages > 1 %}
-{% set request_uri = uri %}
+    {% if pagination.totalPages is defined and pagination.totalPages > 1 %}
+        {% set request_uri = uri %}
 
-{# Pagination Links #}
-<div class="col">
-    {% if pagination.totalPages > 1 %}
-    {# Number of page around current page+1 #}
-    {% set nearbyPagesLimit = 3 %}
-    <ul class="pagination pagination-radius-0">
-        {% if pagination.page != 1 %}
-        <li class="page-item">
-            <a href="{{ path(request_uri, { 'page': 1 }) }}" class="page-link" title="{{'First'|trans}}">
-                <span class="fa fa-chevron-left"></span>
-            </a>
-        </li>
-        {% endif %}
-        {% for i in 1..pagination.totalPages %}
-        {% if 0 == (pagination.page - nearbyPagesLimit) - loop.index %} {# dot before #}
-        <li class="disabled page-item"><a href="#" class="page-link">...</a></li>
-        {% elseif 0 == (pagination.page + nearbyPagesLimit) - loop.index %} {# dot after #}
-        <li class="disabled page-item"><a href="#" class="page-link">...</a></li>
-        {% elseif 0 < (pagination.page - nearbyPagesLimit) - loop.index %} {# hide all before #} {% elseif 0>
-            (pagination.page + nearbyPagesLimit) - loop.index %} {# hide all after #}
-            {% else %}
-            <li {% if pagination.page==loop.index %} class="page-item active" {% endif %}>
-                <a href="{{ path(request_uri, { 'page': loop.index }) }}" class="page-link">{{ loop.index }}</a>
-            </li>
+        {# Pagination Links #}
+        <div class="col">
+            {% if pagination.totalPages > 1 %}
+                {# Number of page around current page+1 #}
+                {% set nearbyPagesLimit = 3 %}
+                <ul class="pagination pagination-radius-0">
+                    {% if pagination.page != 1 %}
+                        <li class="page-item">
+                            <a href="{{ path(request_uri, { 'page': 1 }) }}" class="page-link"
+                               title="{{ 'First'|trans }}">
+                                <span class="fa fa-chevron-left"></span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in 1..pagination.totalPages %}
+                        {% if 0 == (pagination.page - nearbyPagesLimit) - loop.index %} {# dot before #}
+                            <li class="disabled page-item"><a href="#" class="page-link">...</a></li>
+                        {% elseif 0 == (pagination.page + nearbyPagesLimit) - loop.index %} {# dot after #}
+                            <li class="disabled page-item"><a href="#" class="page-link">...</a></li>
+                        {% elseif 0 < (pagination.page - nearbyPagesLimit) - loop.index %} {# hide all before #} {% elseif 0>
+                            (pagination.page + nearbyPagesLimit) - loop.index %} {# hide all after #}
+                        {% else %}
+                            <li {% if pagination.page==loop.index %} class="page-item active" {% endif %}>
+                                <a href="{{ path(request_uri, { 'page': loop.index }) }}"
+                                   class="page-link">{{ loop.index }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if pagination.page != pagination.totalPages %}
+                        <li class="page-item">
+                            <a href="{{ path(request_uri, { 'page': pagination.totalPages }) }}" class="page-link"
+                               title="{{ 'Last'|trans }}">
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             {% endif %}
-            {% endfor %}
-            {% if pagination.page != pagination.totalPages %}
-            <li class="page-item">
-                <a href="{{ path(request_uri, { 'page': pagination.totalPages }) }}" class="page-link" title="{{'Last'|trans}}">
-                    <span class="fa fa-chevron-right"></span>
-                </a>
-            </li>
-            {% endif %}
-    </ul>
+        </div>
+
+        {# Limit #}
+        <div class="col">
+            <div class="text-muted float-right">
+
+                <form action="{{ path('app_admin_user_setting_store_limit') }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" value="{{ request_uri }}" name="uri">
+
+                    <select class="form-control b-light" id="iLimit" aria-label="Default select" name="limit"
+                            onchange="this.form.submit();" required style="border: 1px solid #dee2e6">
+
+                        {% for option in pagination.padginationOptions %}
+                            <option value="{{ option }}" {{ paginationLimit==option ? 'selected' : '' }}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+
+                    </select>
+                </form>
+            </div>
+        </div>
     {% endif %}
-</div>
 
-{# Limit #}
-<div class="col">
-    <div class="text-muted float-right">
-
-        <form action="{{path('app_admin_user_setting_store_limit')}}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <input type="hidden" value="{{ request_uri }}" name="uri">
-
-            <select class="form-control b-light" id="iLimit" aria-label="Default select" name="limit"
-                onchange="this.form.submit();" required style="border: 1px solid #dee2e6">
-
-                {% for option in pagination.padginationOptions %}
-                <option value="{{ option }}" {{ paginationLimit==option ? 'selected' : '' }}>
-                    {{ option }}
-                </option>
-                {% endfor %}
-
-            </select>
-        </form>
-    </div>
-</div>
-{% endif %}
-
-{% if paginationLimit >= pagination.limitToResetPagination %}
-<div class="col">
-    <form action="#" class="float-right" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <input type="hidden" name="limit" value="{{ pagination.defualtLimit }}">
-        <input type="hidden" name="uri" value="{{ app.request.get('_route') }}">
-        <span class="text-primary pointer" onclick="this.closest('form').submit();">
+    {% if paginationLimit >= pagination.limitToResetPagination %}
+        <div class="col">
+            <form action="#" class="float-right" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="hidden" name="limit" value="{{ pagination.defualtLimit }}">
+                <input type="hidden" name="uri" value="{{ app.request.get('_route') }}">
+                <span class="text-primary pointer" onclick="this.closest('form').submit();">
             {{ 'Reset Limit Of Pagination'|trans }}
             <img src="{{ asset('static/img/svg/arrow-reset-limit.svg') }}" alt="{{ 'Reset Limit'|trans }}">
         </span>
-    </form>
-</div>
-{% endif %}
+            </form>
+        </div>
+    {% endif %}
 
 {% endif %}

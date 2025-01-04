@@ -24,7 +24,7 @@ class IndexController extends AbstractBaseController
     private const SEARCH_ROUTE = 'app_admin_newsletter_subscribers_serach_show';
 
     public function __construct(
-        private readonly SubscriberService $subscriberService,
+        private readonly SubscriberService  $subscriberService,
         private readonly UserSettingService $userSettingService
     ) {
     }

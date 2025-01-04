@@ -17,7 +17,7 @@ class ContactUsController extends AbstractController
     use FormValidationTrait;
 
     private const HOME_ROUTE = 'app_home';
-    private const CONTECT_US_ROUTE = 'app_contact_us_index';
+    private const CONTACT_US_ROUTE = 'app_contact_us_index';
 
     public function __construct(
         private readonly MonologService $monolog
@@ -43,7 +43,7 @@ class ContactUsController extends AbstractController
 
         if (!$name || !$email || !$subject || !$message) {
             $this->addFlash('warning', 'All fields are required.');
-            return $this->redirectToRoute(self::CONTECT_US_ROUTE);
+            return $this->redirectToRoute(self::CONTACT_US_ROUTE);
         }
 
         $this->monolog->logger->debug(

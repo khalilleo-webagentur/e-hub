@@ -22,10 +22,10 @@ class SendNeswletterController extends AbstractBaseController
     use RandomTokenGeneratorTrait;
 
     public function __construct(
-        private readonly NewsletterService $newsletterService,
-        private readonly SubscriberService $subscriberService,
+        private readonly NewsletterService           $newsletterService,
+        private readonly SubscriberService           $subscriberService,
         private readonly NewsletterSubscriberService $newsletterSubscriberService,
-        private readonly MonologService $monolog,
+        private readonly MonologService              $monolog,
     ) {
     }
 
@@ -46,7 +46,7 @@ class SendNeswletterController extends AbstractBaseController
         $subscriber = $this->subscriberService->getOneTheReceiveNewsletter();
 
         if (!$subscriber) {
-            
+
             $this->newsletterService->updateStatusIsSentAndCanBePublished($newsletter);
             $this->subscriberService->resetReceivedForSubscribers();
             $this->monolog->logger->notice('No active subscribers found.');

@@ -4,80 +4,83 @@
 
 {% block body %}
 
-<div class="content-wrapper">
+    <div class="content-wrapper">
 
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-8">
-                    <h5 class="text-dark">Edit User Details</h5>
-                </div>
-                <div class="col-4">
-                    <div class="breadcrumb float-right">
-                        <a href="{{path('app_admin_users_index')}}" class="text-secondary">
-                            Close <span class="fa fa-window-close"></span>
-                        </a>
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="text-dark">Edit User Details</h5>
+                    </div>
+                    <div class="col-4">
+                        <div class="breadcrumb float-right">
+                            <a href="{{ path('app_admin_users_index') }}" class="text-secondary">
+                                Close <span class="fa fa-window-close"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <section class="content">
+            <div class="container-fluid area-section">
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form action="{{ path('app_admin_user_store', {id:user.id}) }}" method="post">
+
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <label for="V9xO3aD7v" class="form-label">Name <span
+                                                class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="V9xO3aD7v" placeholder="Type name"
+                                           value="{{ user.name }}" name="name">
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="2hV9xO3aD7v" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="2hV9xO3aD7v" placeholder="Type email"
+                                           value="{{ user.email }}" name="email">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="4jX2hV9xO3aD7v" class="form-label">Verification-Token</label>
+                                <input type="text" class="form-control" id="4jX2hV9xO3aD7v" placeholder="Type token"
+                                       value="{{ user.token }}" name="token">
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="4lN3jG3gE9oB3o"
+                                           name="isVerified"
+                                            {{ user.isVerified ? 'checked' : '' }}>
+                                    <label class="form-check-label text-secondary" for="4lN3jG3gE9oB3o">
+                                        is Account being verified
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="7lN3jG3gE9oB3Do"
+                                           name="isDeleted"
+                                            {{ user.isDeleted ? 'checked' : '' }}>
+                                    <label class="form-check-label text-secondary" for="7lN3jG3gE9oB3Do">
+                                        is Account being deleted
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="my-3">
+                                {% include 'admin/component/button/default_edit_btn.html.twig' %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
-
-    <section class="content">
-        <div class="container-fluid area-section">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <form action="{{path('app_admin_user_store', {id:user.id})}}" method="post">
-
-                    <div class="row">
-                        <div class="mb-3 col-lg-6">
-                            <label for="V9xO3aD7v" class="form-label">Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="V9xO3aD7v" placeholder="Type name"
-                                value="{{user.name}}" name="name">
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="2hV9xO3aD7v" class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="2hV9xO3aD7v" placeholder="Type email"
-                                value="{{user.email}}" name="email">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="4jX2hV9xO3aD7v" class="form-label">Verification-Token</label>
-                        <input type="text" class="form-control" id="4jX2hV9xO3aD7v" placeholder="Type token"
-                            value="{{user.token}}" name="token">
-                    </div>
-
-                        <div class="mb-3">
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="4lN3jG3gE9oB3o" name="isVerified"
-                                    {{user.isVerified ? 'checked' : '' }}>
-                                <label class="form-check-label text-secondary" for="4lN3jG3gE9oB3o">
-                                    is Account being verified
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="7lN3jG3gE9oB3Do" name="isDeleted"
-                                    {{user.isDeleted ? 'checked' : '' }}>
-                                <label class="form-check-label text-secondary" for="7lN3jG3gE9oB3Do">
-                                    is Account being deleted
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="my-3">
-                            {% include 'admin/component/button/default_edit_btn.html.twig' %}
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </section>
-</div>
 
 {% endblock %}

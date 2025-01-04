@@ -1,6 +1,6 @@
-<button class="btn btn-sm mr-1 modal-action-btn" 
-    title="{{ btnTitle is defined ? btnTitle : 'n/a' }}" data-toggle="modal"
-    data-target="#{{btnDataTargetId is defined ? btnDataTargetId : 'n/a'}}">
-    <span class="fa {{btnIcon is defined ? btnIcon : ''}} fa-sm pointer px-1 text-secondary"></span>
+<button class="btn btn-sm mr-1 modal-action-btn"
+        title="{{ btnTitle is defined ? btnTitle : 'n/a' }}" data-toggle="modal"
+        data-target="#{{ btnDataTargetId is defined ? btnDataTargetId : 'n/a' }}">
+    <span class="fa {{ btnIcon is defined ? btnIcon : '' }} fa-sm pointer px-1 text-secondary"></span>
     <span class="sm-md-d-none text-secondary">{{ btnName is defined ? btnName : 'n/a' }}</span>
 </button>
