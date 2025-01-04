@@ -1,10 +1,10 @@
 parameters:
 
-  app_version: "1.1.4"
+  app_version: "1.1.7"
   
-  app_name: "e-hub"
-  full_app_name: "e-hub"
-  no_reply: "no-reply@khalilleo.com"
+  app_name: "E-hub"
+  full_app_name: "E-hub"
+  no_reply: "no-reply@e-hub.khalilleo.com"
 
   webmasterName: "Webmaster"
   webmasterEmail: "demo@khalilleo.com"
