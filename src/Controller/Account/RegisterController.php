@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Controller\Account;
 
 use App\Entity\User;
+use App\Entity\UserSetting;
 use App\Mails\Account\AccountConfirmationMail;
 use App\Service\TokenGeneratorService;
 use App\Service\UserService;
+use App\Service\UserSettingService;
 use App\Traits\FormValidationTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,6 +29,7 @@ class RegisterController extends AbstractController
 
     public function __construct(
         private readonly UserService           $userService,
+        private readonly UserSettingService    $userSettingService,
         private readonly TokenGeneratorService $tokenGeneratorService
     ) {
     }
@@ -73,6 +76,10 @@ class RegisterController extends AbstractController
                 ->setPassword($this->userService->encodePassword($email))
                 ->setToken($token)
         );
+
+        $userSetting = new UserSetting();
+
+        $this->userSettingService->save($userSetting->setUser($user));
 
         $accountConfirmationMail->send($name, $email, $token);
 
