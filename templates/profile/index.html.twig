@@ -16,14 +16,20 @@
                     {% if not is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
                             <img src="{{ asset('assets/img/svg/exclamation-triangle.svg') }}" alt="Warning" width="15"
-                                 height="15" style="margin-top: -4px;"> Please contact us to let you access the
-                            dashboard.
+                                 height="15" style="margin-top: -4px;"> Please contact us to let you access the dashboard.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endif %}
 
 
-                    <h5 class="text-secondary mt-lg-5 mt-3">My Profile</h5>
+                    <h5 class="text-secondary mt-5">
+                        My Profile
+                        <small class="float-end small">
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="{{ path('app_admin_index') }}" class="text-success small mb-0 pb-0">Dashboard</a>
+                            {% endif %}
+                        </small>
+                    </h5>
 
                     <div class="bg-white rounded-3">
 
@@ -33,11 +39,6 @@
                                      style="border-radius: 15px;">
                             </div>
                             <div class="col-10">
-                                <p class="float-end small md-d-none">
-                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                        <a href="{{ path('app_admin_index') }}" class="text-success">Dashboard</a>
-                                    {% endif %}
-                                </p>
                                 <p class="text-secondary pt-3">Username: {{ app.user.name }}</p>
                                 <p class="text-secondary">Email: {{ app.user.email }}</p>
                                 <p class="text-secondary">Created: {{ app.user.createdAt|date('d.m.Y') }}</p>
