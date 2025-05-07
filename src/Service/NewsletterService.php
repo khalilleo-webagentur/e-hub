@@ -8,6 +8,7 @@ use App\Entity\Newsletter;
 use App\Repository\NewsletterRepository;
 use App\Traits\RandomTokenGeneratorTrait;
 use DateTime;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class NewsletterService
 {
@@ -35,6 +36,14 @@ final class NewsletterService
     /**
      * @return Newsletter[]
      */
+    public function getAllByUser(UserInterface $user): array
+    {
+        return $this->newsletterRepository->findAllByUserOrderByDesc($user);
+    }
+
+    /**
+     * @return Newsletter[]
+     */
     public function getAll(): array
     {
         return $this->newsletterRepository->findAllOrderByDesc();
@@ -56,7 +65,7 @@ final class NewsletterService
         return $newsletter;
     }
 
-    public function deactiveAllOthersNewsletter(): void
+    public function deactivateAllOthersNewsletter(): void
     {
         if ($newsletter = $this->getByCanBePublished()) {
             $this->updateCanBePublished($newsletter, false);
@@ -70,8 +79,9 @@ final class NewsletterService
         return $newsletter;
     }
 
-    public function createOrupdate(
+    public function createOrUpdate(
         ?Newsletter $newsletter,
+        UserInterface $user,
         string      $title,
         string      $content,
         bool        $canBePublished = false,
@@ -86,6 +96,7 @@ final class NewsletterService
         }
 
         $newsletter
+            ->setUser($user)
             ->setTitle($title)
             ->setContent($content)
             ->setToken($token)

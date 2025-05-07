@@ -10,26 +10,28 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h5 class="text-dark pt-1">Subscribers</h5>
+                        <h5 class="text-dark pt-1" title="{{ total }}">Subscribers</h5>
                     </div>
                     <div class="col-sm-8">
                         <ol class="breadcrumb text-end fs-15 pb-2">
+
+                            {% if subscribers is defined and subscribers %}
+                            <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#resetModal">
+                                <span class="md-d-none pr-1">Reset</span> <span class="fa fa-flag fa-sm"></span>
+                            </li>
+
+                            <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                data-target="#exportSubscribersModal">
+                                <span class="md-d-none pr-1">Export</span> <span
+                                        class="fa fa-download fa-sm"></span>
+                            </li>
+                            {% endif %}
+
+                            <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#uploadModal">
+                                <span class="md-d-none pr-1">Import</span> <span class="fa fa-upload fa-sm"></span>
+                            </li>
+
                             {% if subscribers is defined and subscribers and is_granted('ROLE_SUPER_ADMIN') %}
-
-                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#resetModal">
-                                    <span class="md-d-none pr-1">Reset</span> <span class="fa fa-flag fa-sm"></span>
-                                </li>
-
-                                <li class="text-secondary pointer d-btn" data-toggle="modal"
-                                    data-target="#exportSubscribersModal">
-                                    <span class="md-d-none pr-1">Export</span> <span
-                                            class="fa fa-download fa-sm"></span>
-                                </li>
-
-                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#uploadModal">
-                                    <span class="md-d-none pr-1">Import</span> <span class="fa fa-upload fa-sm"></span>
-                                </li>
-
                                 <li class="text-secondary pointer  d-btn" data-toggle="modal"
                                     data-target="#deleteAllSubscribersModal">
                                     <span class="md-d-none pr-1">Clean Up</span> <span class="fa fa-cog fa-sm"></span>
@@ -40,21 +42,13 @@
                                     <span class="md-d-none pr-1">Delete All</span> <span
                                             class="fa fa-trash fa-sm"></span>
                                 </li>
-
-                                <li class="text-secondary pointer d-btn" data-toggle="modal"
-                                    data-target="#infoNewsletterModal">
-                                    <span class="md-d-none pr-1">Infos</span> <span
-                                            class="fa fa-info-circle fa-sm"></span>
-                                </li>
-
-                            {% else %}
-
-                                <li class="text-primary pointer" data-toggle="modal" data-target="#uploadModal">
-                                    <span class="md-d-none">Import Subscribers</span> <span
-                                            class="fa fa-upload fa-sm"></span>
-                                </li>
-
                             {% endif %}
+
+                            <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                data-target="#infoNewsletterModal">
+                                <span class="md-d-none pr-1">Infos</span> <span
+                                        class="fa fa-info-circle fa-sm"></span>
+                            </li>
                         </ol>
                     </div>
                 </div>

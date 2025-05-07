@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/newsletter/export')]
+#[Route('/u7x6g2q8r6/newsletter/export')]
 class ExportController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -35,45 +35,45 @@ class ExportController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         $currentPassword = $this->validate($request->request->get('currentPassword'));
 
         if (!$this->userService->isPasswordValid($this->getUser(), $currentPassword)) {
-
             $this->addFlash('warning', 'Please type your current password');
-
             return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        if ($this->validateCheckbox($request->request->get('justEmails'))) {
+        $user = $this->getUser();
 
-            return new Response($exportSubscribersDataService->emailsAsJson());
+        if ($this->validateCheckbox($request->request->get('justEmails'))) {
+            return new Response($exportSubscribersDataService->emailsAsJson($user));
         }
 
-        return new Response($exportSubscribersDataService->asJson());
+        return new Response($exportSubscribersDataService->asJson($user));
     }
 
 
     #[Route('/newsletters-data', name: 'app_admin_newsletter_export', methods: 'POST')]
     public function exportNewsletters(Request $request, ExportNewslettersService $exportNewslettersService): RedirectResponse|Response
     {
-        if (!$this->isCsrfTokenValid('authenticate', $this->validate($request->request->get('_csrf_token')))) {
+        $token = $this->validate($request->request->get('_csrf_token'));
+
+        if (!$this->isCsrfTokenValid('authenticate', $token)) {
             $this->addFlash('warning', 'CSRF Token is not valid.');
             return $this->redirectToRoute(self::ADMIN_NEWSLETTERS_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
-
+        $this->denyAccessUnlessGrantedRoleUser();
         $currentPassword = $this->validate($request->request->get('currentPassword'));
 
         if (!$this->userService->isPasswordValid($this->getUser(), $currentPassword)) {
-
             $this->addFlash('warning', 'Please type your current password');
-
             return $this->redirectToRoute(self::ADMIN_NEWSLETTERS_ROUTE_INDEX);
         }
 
-        return new Response($exportNewslettersService->asJson());
+        $user = $this->getUser();
+
+        return new Response($exportNewslettersService->asJson($user));
     }
 }

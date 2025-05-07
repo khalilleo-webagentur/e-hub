@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/subscribers')]
+#[Route('/u7x6g2q8r6/subscribers')]
 class SearchController extends AbstractBaseController
 {
     use FormValidationTrait;

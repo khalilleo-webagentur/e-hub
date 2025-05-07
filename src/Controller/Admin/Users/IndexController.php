@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\Users;
 
+use App\Controller\Admin\AbstractBaseController;
 use App\Service\UserService;
 use App\Traits\FormValidationTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('admin/dashboard/c2o5i0p7v6s5p4w5')]
-class IndexController extends AbstractController
+#[Route('u7x6g2q8r6/dashboard/c2o5i0p7v6s5p4w5')]
+class IndexController extends AbstractBaseController
 {
     use FormValidationTrait;
 
@@ -27,9 +27,11 @@ class IndexController extends AbstractController
     #[Route('/users/home', name: 'app_admin_users_index')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $users = $this->userService->getAll();
+        $users = $this->isSuperAdmin()
+            ? $this->userService->getAll()
+            : [$this->getUser()];
 
         return $this->render('admin/users/index.html.twig', [
             'users' => $users,
@@ -39,9 +41,11 @@ class IndexController extends AbstractController
     #[Route('/user/edit/{id}', name: 'app_admin_user_edit')]
     public function edit(?string $id): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $user = $this->userService->getById($this->validateNumber($id));
+        $user = $this->isSuperAdmin()
+            ? $this->userService->getById($this->validateNumber($id))
+            : $this->getUser();
 
         if (!$user) {
             $this->addFlash('warning', 'User could not be found.');
@@ -56,7 +60,7 @@ class IndexController extends AbstractController
     #[Route('/user/store/{id}', name: 'app_admin_user_store', methods: 'POST')]
     public function store(?string $id, Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $name = $this->validate($request->request->get('name'));
 
@@ -69,7 +73,9 @@ class IndexController extends AbstractController
 
         $token = $this->validate($request->request->get('token'));
 
-        $user = $this->userService->getById($this->validateNumber($id));
+        $user = $this->isSuperAdmin()
+            ? $this->userService->getById($this->validateNumber($id))
+            : $this->getUser();
 
         if (!$user) {
             $this->addFlash('warning', 'User could not be found.');

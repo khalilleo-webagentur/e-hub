@@ -16,7 +16,8 @@
                     {% if not is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
                             <img src="{{ asset('assets/img/svg/exclamation-triangle.svg') }}" alt="Warning" width="15"
-                                 height="15" style="margin-top: -4px;"> Please contact us to let you access the dashboard.
+                                 height="15" style="margin-top: -4px;">
+                            Your Data will be deleted in few days.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endif %}
@@ -25,8 +26,8 @@
                     <h5 class="text-secondary mt-5">
                         My Profile
                         <small class="float-end small">
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <a href="{{ path('app_admin_index') }}" class="text-success small mb-0 pb-0">Dashboard</a>
+                            {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('app_admin_index') }}" class="text-success fs-13 mb-0 pb-0">Dashboard</a>
                             {% endif %}
                         </small>
                     </h5>
@@ -47,50 +48,62 @@
 
                     </div>
 
-                    <h5 class="text-secondary mt-5">Setting</h5>
+                    <h5 class="text-secondary mt-5">General Setting</h5>
 
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-2">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3">
                         <div class="col">
                             <div class="card h-100 d-border py-lg-1">
                                 <div class="card-body">
-                                    <h6 class="card-title text-secondary mb-0" data-bs-toggle="modal"
+                                    <h6 class="card-title text-secondary mb-2" data-bs-toggle="modal"
                                         data-bs-target="#usernameModal">
-                                        Change Username <span
-                                                class="float-end text-secondary pointer bi bi-pencil-square"></span>
+                                        Username
                                     </h6>
+                                    <small class="text-secondary">
+                                        Change your Username.
+                                        <span class="float-end text-light-50 pointer bi bi-pencil-square"></span>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card h-100 d-border py-lg-1">
                                 <div class="card-body">
-                                    <h6 class="card-title text-secondary mb-0" data-bs-toggle="modal"
+                                    <h6 class="card-title text-secondary mb-2" data-bs-toggle="modal"
                                         data-bs-target="#emailModal">
-                                        Change Email <span
-                                                class="float-end text-secondary pointer bi bi-pencil-square"></span>
+                                        E-mail Address
                                     </h6>
+                                    <small class="text-secondary">
+                                        Change your email.
+                                        <span class="float-end text-light-50 pointer bi bi-pencil-square"></span>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card h-100 d-border py-lg-1">
                                 <div class="card-body">
-                                    <h6 class="card-title text-secondary mb-0" data-bs-toggle="modal"
+                                    <h6 class="card-title text-secondary mb-2" data-bs-toggle="modal"
                                         data-bs-target="#exportModal">
-                                        Download Personal Data <span
-                                                class="float-end text-secondary pointer bi bi-download"></span>
+                                        Download Personal Data
                                     </h6>
+                                    <small class="text-secondary">
+                                        Download your data as JSON-Format.
+                                        <span class="float-end text-light-50 pointer bi bi-download"></span>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card h-100 d-border py-lg-1">
                                 <div class="card-body">
-                                    <h6 class="card-title text-secondary mb-0" data-bs-toggle="modal"
+                                    <h6 class="card-title text-secondary mb-2" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal">
-                                        Delete Account <span
-                                                class="float-end text-secondary pointer bi bi-trash"></span>
+                                        Delete Account
                                     </h6>
+                                    <small class="text-secondary">
+                                        Request account deletion.
+                                        <span class="float-end text-light-50 pointer bi bi-trash"></span>
+                                    </small>
                                 </div>
                             </div>
                         </div>

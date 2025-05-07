@@ -56,10 +56,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?UserSetting $userSetting = null;
 
+    /**
+     * @var Collection<int, Subscriber>
+     */
+    #[ORM\OneToMany(targetEntity: Subscriber::class, mappedBy: 'user')]
+    private Collection $subscribers;
+
+    /**
+     * @var Collection<int, Newsletter>
+     */
+    #[ORM\OneToMany(targetEntity: Newsletter::class, mappedBy: 'user')]
+    private Collection $newsletters;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime());
         $this->tempUsers = new ArrayCollection();
+        $this->subscribers = new ArrayCollection();
+        $this->newsletters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -237,6 +251,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->userSetting = $userSetting;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Subscriber>
+     */
+    public function getSubscribers(): Collection
+    {
+        return $this->subscribers;
+    }
+
+    public function addSubscriber(Subscriber $subscriber): static
+    {
+        if (!$this->subscribers->contains($subscriber)) {
+            $this->subscribers->add($subscriber);
+            $subscriber->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriber(Subscriber $subscriber): static
+    {
+        if ($this->subscribers->removeElement($subscriber)) {
+            // set the owning side to null (unless already changed)
+            if ($subscriber->getUser() === $this) {
+                $subscriber->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Newsletter>
+     */
+    public function getNewsletters(): Collection
+    {
+        return $this->newsletters;
+    }
+
+    public function addNewsletter(Newsletter $newsletter): static
+    {
+        if (!$this->newsletters->contains($newsletter)) {
+            $this->newsletters->add($newsletter);
+            $newsletter->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewsletter(Newsletter $newsletter): static
+    {
+        if ($this->newsletters->removeElement($newsletter)) {
+            // set the owning side to null (unless already changed)
+            if ($newsletter->getUser() === $this) {
+                $newsletter->setUser(null);
+            }
+        }
 
         return $this;
     }

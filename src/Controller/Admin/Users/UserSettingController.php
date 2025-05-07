@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('admin/dashboard/user-setting/c4o6ihpsvn6s5w4wl')]
+#[Route('u7x6g2q8r6/dashboard/user-setting/c4o6ihp7vn6s5w4wl')]
 class UserSettingController extends AbstractController
 {
     use FormValidationTrait;

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Newsletter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Newsletter>
@@ -46,6 +47,19 @@ class NewsletterRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @return Newsletter[]
+     */
+    public function findAllByUserOrderByDesc(UserInterface $user): array
+    {
+        return $this->createQueryBuilder('t1')
+            ->where('t1.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('t1.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

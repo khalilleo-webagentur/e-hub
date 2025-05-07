@@ -10,6 +10,14 @@
     background-color: green;
 }
 
+.text-light-50 {
+    color: #ccc !important;
+}
+
+.text-light-50:hover {
+    color: #878787 !important;
+}
+
 .alert {
     border-radius: 0;
 }

@@ -6,7 +6,7 @@ namespace App\Service\Export;
 
 use App\Helper\ExportHelper;
 
-abstract class ExporterAbstruct
+abstract class ExporterAbstract
 {
     protected function jsonEncode(string $fileName, array $data): bool|string
     {

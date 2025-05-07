@@ -1,4 +1,4 @@
-{% if is_granted('ROLE_SUPER_ADMIN') %}
+{% if is_granted('ROLE_USER') %}
     <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -67,7 +67,7 @@
 
                         <div class="form-group">
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="subscribed" name="subscribed">
+                                <input type="checkbox" class="form-check-input" id="subscribed" name="subscribed" checked>
                                 <label class="form-check-label" for="subscribed">
                                     {{ 'Mark them as subscribed'|trans }}
                                 </label>

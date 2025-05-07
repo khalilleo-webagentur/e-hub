@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/subscriber')]
+#[Route('/u7x6g2q8r6/subscriber')]
 class IndexController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -32,9 +32,7 @@ class IndexController extends AbstractBaseController
     #[Route('/home/{page?}', name: 'app_admin_newsletter_subscribers_index')]
     public function index(?string $page, PaginationService $paginationService): Response
     {
-        $this->denyAccessUnlessGrantedRoleAdmin();
-
-        $user = $this->getUser();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         $page = $this->validateNumber($page);
 
@@ -42,15 +40,21 @@ class IndexController extends AbstractBaseController
             return $this->redirectToRoute(self::PAGE_NOT_FOUND_ROUTE_INDEX);
         }
 
+        $user = $this->getUser();
+
         $userSetting = $this->userSettingService->getByUser($user);
 
         $limit = $userSetting->getPaginationLimit();
 
         $offset = $paginationService->getOffset($page, $limit);
 
-        $subscribers = $this->subscriberService->getAllWithOffsetAndLimit($offset, $limit);
+        $subscribers = $this->isSuperAdmin()
+            ? $this->subscriberService->getAllWithOffsetAndLimit($offset, $limit)
+            : $this->subscriberService->getAllByUserWithOffsetAndLimit($user, $offset, $limit);
 
-        $allSubscribers = $this->subscriberService->getAll();
+        $allSubscribers = $this->isSuperAdmin()
+            ? $this->subscriberService->getAll()
+            : $this->subscriberService->getAllByUser($user);
 
         $pagination = $paginationService->paginate($allSubscribers, $page, $limit);
 
@@ -67,8 +71,6 @@ class IndexController extends AbstractBaseController
     public function show(?string $id): Response
     {
         $this->denyAccessUnlessGrantedRoleAdmin();
-
-        $user = $this->getUser();
 
         $subscriberId = $this->validateNumber($id);
 

@@ -3,6 +3,7 @@
     <div class="sidebar">
 
         {% set cUri = app.request.get('_route') %}
+        {% set isSuperAdmin = is_granted('ROLE_SUPER_ADMIN') %}
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -29,8 +30,8 @@
 
                 <li class="nav-item">
                     <a href="{{ path('app_admin_users_index') }}" class="nav-link">
-                        <i class="fas fa-users nav-icon"></i>
-                        <p>Users</p>
+                        <i class="fas fa-{{ isSuperAdmin ? 'users' : 'user' }} nav-icon"></i>
+                        <p>{{ isSuperAdmin ? 'Users' : 'User' }}</p>
                     </a>
                 </li>
 
@@ -63,7 +64,7 @@
                 </li>
 
 
-                <li class="nav-item has-treeview">
+{#                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>
@@ -79,7 +80,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>#}
 
                 <li class="nav-header">EXTRA</li>
 

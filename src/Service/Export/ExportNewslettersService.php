@@ -7,20 +7,21 @@ namespace App\Service\Export;
 use App\Entity\Newsletter;
 use App\Helper\ExportHelper;
 use App\Service\NewsletterService;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-final class ExportNewslettersService extends ExporterAbstruct implements ExporterInterface
+final class ExportNewslettersService extends ExporterAbstract implements ExporterInterface
 {
     public function __construct(
         private readonly NewsletterService $newsletterService,
     ) {
     }
 
-    public function asJson(): bool|string
+    public function asJson(UserInterface $user): bool|string
     {
-        return $this->jsonEncode(ExportHelper::DEFAULT_NEWSLETTER_FILE_NAME, $this->data());
+        return $this->jsonEncode(ExportHelper::DEFAULT_NEWSLETTER_FILE_NAME, $this->data($user));
     }
 
-    private function data(): array
+    private function data(UserInterface $user): array
     {
         return array_map(static function (Newsletter $entity) {
             return [
@@ -32,6 +33,6 @@ final class ExportNewslettersService extends ExporterAbstruct implements Exporte
                 'modified' => ($entity->getUpdatedAt())->format(ExportHelper::DEFAULT_DATETIME_FORMAT),
                 'created' => ($entity->getCreatedAt())->format(ExportHelper::DEFAULT_DATETIME_FORMAT)
             ];
-        }, $this->newsletterService->getAll());
+        }, $this->newsletterService->getAllByUser($user));
     }
 }

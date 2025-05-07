@@ -16,13 +16,13 @@ abstract class AbstractBaseController extends AbstractController
     protected const LOGIN_ROUTE = 'app_login';
     protected const HOME_ROUTE = 'app_home';
 
-    protected function denyAccessUnlessGrantedRoleEditor(): ?RedirectResponse
+    protected function denyAccessUnlessGrantedRoleUser(): ?RedirectResponse
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute(self::LOGIN_ROUTE);
         }
 
-        $this->denyAccessUnlessGranted(UserHelper::ROLE_EDITOR);
+        $this->denyAccessUnlessGranted(UserHelper::ROLE_USER);
 
         return null;
     }
@@ -36,5 +36,10 @@ abstract class AbstractBaseController extends AbstractController
         $this->denyAccessUnlessGranted(UserHelper::ROLE_ADMIN);
 
         return null;
+    }
+
+    protected function isSuperAdmin(): bool
+    {
+        return $this->isGranted(UserHelper::ROLE_ADMIN);
     }
 }

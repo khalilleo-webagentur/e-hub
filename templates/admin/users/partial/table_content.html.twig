@@ -2,7 +2,6 @@
     <table class="table table-hover text-nowrap">
         <thead>
         <tr class="fs-14">
-            <th>#</th>
             <th>{{ 'Name'|trans }}</th>
             <th>{{ 'Email'|trans }}</th>
             <th>{{ 'Token'|trans }}</th>
@@ -16,7 +15,6 @@
         <tbody>
         {% for row in users %}
             <tr class="fs-14">
-                <td>{{ row.id }}</td>
                 <td>{{ row.name|capitalize }}</td>
                 <td>{{ row.email }}</td>
                 <td>{{ row.token ? row.token : '---' }}</td>

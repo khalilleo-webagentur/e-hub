@@ -51,7 +51,7 @@ final class UserService
         return password_hash($text, PASSWORD_DEFAULT);
     }
 
-    public function isPasswordValid(User $user, string $text): bool
+    public function isPasswordValid(User|UserInterface $user, string $text): bool
     {
         return password_verify($text, $user->getPassword());
     }

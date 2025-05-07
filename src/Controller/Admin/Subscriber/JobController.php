@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/subscriber/job')]
+#[Route('/u7x6g2q8r6/subscriber/job')]
 class JobController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -34,11 +34,16 @@ class JobController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_NEWSLETTER_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         $id = $this->validateNumber($request->request->get('id'));
+        $user = $this->getUser();
 
-        if ($subscriber = $this->subscriberService->getById($id)) {
+        $subscriber = $this->isSuperAdmin()
+            ? $this->subscriberService->getById($id)
+            : $this->subscriberService->getOneByUserAndId($user, $id);
+
+        if ($subscriber) {
             $isSubscribed = !$this->validateCheckbox($request->request->get('isSubscribed'));
             $this->subscriberService->save($subscriber->setIsSubscribed($isSubscribed));
             $this->addFlash(
@@ -62,9 +67,13 @@ class JobController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_NEWSLETTER_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
-        if ($subscribers = $this->subscriberService->getSubescribedAndReceivedNewsletter()) {
+        $user = $this->getUser();
+
+        $subscribers = $this->subscriberService->getSubscribedAndReceivedNewsletterByUser($user);
+
+        if ($subscribers) {
 
             $count = 0;
 

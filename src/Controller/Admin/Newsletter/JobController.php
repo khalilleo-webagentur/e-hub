@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/newsletter/job')]
+#[Route('/u7x6g2q8r6/newsletter/job')]
 class JobController extends AbstractBaseController
 {
     use FormValidationTrait;

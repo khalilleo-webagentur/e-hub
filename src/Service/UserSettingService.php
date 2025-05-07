@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\UserSetting;
 use App\Repository\UserSettingRepository;
 use DateTime;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserSettingService
 {
@@ -21,7 +22,7 @@ final class UserSettingService
         return $this->userSettingRepository->find($id);
     }
 
-    public function getByUser(User $user): ?UserSetting
+    public function getByUser(User|UserInterface $user): ?UserSetting
     {
         $userSetting = $this->userSettingRepository->findOneBy(['user' => $user]);
 

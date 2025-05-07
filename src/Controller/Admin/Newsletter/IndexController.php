@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/newsletter')]
+#[Route('/u7x6g2q8r6/newsletter')]
 class IndexController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -30,11 +30,13 @@ class IndexController extends AbstractBaseController
     #[Route('/home', name: 'app_admin_newsletter_index')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         $user = $this->getUser();
 
-        $newsletters = $this->newsletterService->getAll();
+        $newsletters = $this->isSuperAdmin()
+            ? $this->newsletterService->getAll()
+            : $this->newsletterService->getAllByUser($user);
 
         return $this->render('admin/newsletter/index.html.twig', [
             'profile' => [],
@@ -52,19 +54,21 @@ class IndexController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_NEWSLETTER_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         $title = $this->validate($request->request->get('title'));
         $content = $this->validateTextarea($request->request->get('content'), true);
         $canBePublished = $this->validateCheckbox($request->request->get('canBePublished'));
 
         if ($canBePublished) {
-            $this->newsletterService->deactiveAllOthersNewsletter();
+            $this->newsletterService->deactivateAllOthersNewsletter();
         }
+
+        $user = $this->getUser();
 
         if ($title && $content) {
 
-            $this->newsletterService->createOrupdate(null, $title, $content, $canBePublished);
+            $this->newsletterService->createOrUpdate(null, $user, $title, $content, $canBePublished);
 
             $this->addFlash('success', 'Newsletter has been added.');
 
@@ -80,9 +84,6 @@ class IndexController extends AbstractBaseController
     public function show(string $id): Response
     {
         $this->denyAccessUnlessGrantedRoleAdmin();
-
-        $user = $this->getUser();
-
 
         $newsletter = $this->newsletterService->getById(
             $this->validateNumber($id)
@@ -122,7 +123,7 @@ class IndexController extends AbstractBaseController
         if ($this->validateCheckbox($request->request->get('delete'))) {
             $this->newsletterSubscriberService->deleteByNewsletter($newsletter);
             $this->newsletterService->delete($newsletter);
-            $this->addFlash('success', 'Newsletter has been deleted permanentelly');
+            $this->addFlash('success', 'Newsletter has been deleted permanently');
             return $this->redirectToRoute(self::ADMIN_NEWSLETTER_ROUTE_INDEX);
         }
 
@@ -137,11 +138,14 @@ class IndexController extends AbstractBaseController
         $canBePublished = $this->validateCheckbox($request->request->get('canBePublished'));
 
         if ($canBePublished) {
-            $this->newsletterService->deactiveAllOthersNewsletter();
+            $this->newsletterService->deactivateAllOthersNewsletter();
         }
 
-        $newsletter = $this->newsletterService->createOrupdate(
+        $user = $this->getUser();
+
+        $this->newsletterService->createOrUpdate(
             $newsletter,
+            $user,
             $title,
             $content,
             $canBePublished,

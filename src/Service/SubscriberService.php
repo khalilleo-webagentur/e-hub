@@ -5,24 +5,32 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\Subscriber;
+use App\Entity\User;
 use App\Helper\Job;
 use App\Repository\SubscriberRepository;
 use App\Traits\EmailAddressTrait;
 use App\Traits\RandomTokenGeneratorTrait;
 use DateTime;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class SubscriberService
 {
     use RandomTokenGeneratorTrait;
     use EmailAddressTrait;
 
-    public function __construct(private readonly SubscriberRepository $subscriberRepository)
-    {
+    public function __construct(
+        private readonly SubscriberRepository $subscriberRepository
+    ){
     }
 
     public function getById(int $id): ?Subscriber
     {
         return $this->subscriberRepository->find($id);
+    }
+
+    public function getOneByUserAndId(UserInterface $user, int $id): ?Subscriber
+    {
+        return $this->subscriberRepository->findOneBy(['user' => $user, 'id' => $id]);
     }
 
     public function getByEmail(string $email): ?Subscriber
@@ -33,6 +41,14 @@ final class SubscriberService
     public function getByToken(string $token): ?Subscriber
     {
         return $this->subscriberRepository->findOneBy(['token' => $token]);
+    }
+
+    /**
+     * @return Subscriber[]
+     */
+    public function getAllByUser(UserInterface $user): array
+    {
+        return $this->subscriberRepository->findBy(['user' => $user]);
     }
 
     /**
@@ -59,6 +75,14 @@ final class SubscriberService
     /**
      * @return Subscriber[]
      */
+    public function getActiveSubscribersByUser(UserInterface $user): array
+    {
+        return $this->subscriberRepository->findBy(['user' => $user ,'isSubscribed' => 1]);
+    }
+
+    /**
+     * @return Subscriber[]
+     */
     public function getUnActiveSubscribers(): array
     {
         return $this->subscriberRepository->findBy(['isSubscribed' => 0]);
@@ -67,9 +91,17 @@ final class SubscriberService
     /**
      * @return Subscriber[]
      */
-    public function getSubescribedAndReceivedNewsletter(): array
+    public function getSubscribedAndReceivedNewsletterByUser(UserInterface $user): array
     {
-        return $this->subscriberRepository->findBy(['isSubscribed' => 1, 'hasReceived' => 1]);
+        return $this->subscriberRepository->findBy(['user' => $user, 'isSubscribed' => 1, 'hasReceived' => 1]);
+    }
+
+    /**
+     * @return Subscriber[]
+     */
+    public function getAllByUserWithOffsetAndLimit(UserInterface $user, int $offset, int $limit): array
+    {
+        return $this->subscriberRepository->findAllByUserWithOffsetAndLimit($user, $offset, $limit);
     }
 
     /**
@@ -196,12 +228,13 @@ final class SubscriberService
         return $this->subscriberRepository->findInactiveSubscribersBasedOnModifier($modifier);
     }
 
-    public function import(string $name, string $email, bool $subscribed): void
+    public function import(UserInterface|User $user, string $name, string $email, bool $subscribed): void
     {
         $name = empty($name) ? $this->getNameFromEmailAddress($email) : $name;
 
         $entity = new Subscriber();
         $entity
+            ->setUser($user)
             ->setName($name)
             ->setEmail($email)
             ->setIsSubscribed($subscribed)

@@ -6,7 +6,7 @@ namespace App\Service\Import;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-abstract class ImportAbstruct
+abstract class ImportAbstract
 {
     protected function jsonDecode(UploadedFile|array|null $file): mixed
     {

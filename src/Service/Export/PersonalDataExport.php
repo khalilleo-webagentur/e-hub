@@ -8,10 +8,10 @@ use App\Entity\User;
 use App\Service\UserService;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class PersonalDataExport
+final readonly class PersonalDataExport
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

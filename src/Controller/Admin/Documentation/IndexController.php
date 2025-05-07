@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/documentation')]
+#[Route('/u7x6g2q8r6/documentation')]
 class IndexController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -20,7 +20,7 @@ class IndexController extends AbstractBaseController
     #[Route('/home', name: 'app_admin_documentation_index')]
     public function index(): RedirectResponse|Response
     {
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         return $this->render('admin/documentation/index.html.twig');
     }

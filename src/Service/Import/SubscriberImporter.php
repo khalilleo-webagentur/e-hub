@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace App\Service\Import;
 
 use App\Dto\Newsletter\SubscribersImportDto;
-use App\Helper\AppHelper;
+use App\Entity\User;
 use App\Service\SubscriberService;
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-final class SubscriberImportService extends ImportAbstruct implements ImportInterface
+final class SubscriberImporter extends ImportAbstract implements ImportInterface
 {
-    private $subscribed = false;
-    private $seberator = ';';
+    private bool $subscribed = false;
+    private string $separator = ';';
 
-    public function __construct(private readonly SubscriberService $subscriberService)
-    {
+    public function __construct(
+        private readonly SubscriberService $subscriberService
+    ) {
     }
 
-    public function fromJson(UploadedFile|array|null $file): int
+    public function fromJson(UploadedFile|array|null $file, UserInterface|User $user): int
     {
         if (empty($file)) {
             return 0;
@@ -40,7 +42,7 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
             $email = $subscriber->getEmail();
 
             if ($email) {
-                $this->subscriberService->import($subscriber->getName(), $email, $this->subscribed);
+                $this->subscriberService->import($user, $subscriber->getName(), $email, $this->subscribed);
                 $count++;
             }
         }
@@ -48,7 +50,7 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
         return $count;
     }
 
-    public function fromCsv(UploadedFile|array|null $file): int
+    public function fromCsv(UploadedFile|array|null $file, UserInterface|User $user): int
     {
         if (empty($file)) {
             return 0;
@@ -63,7 +65,7 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
             'email'
         ];
 
-        while (($item = fgetcsv($file, 10000, $this->seberator)) !== false) {
+        while (($item = fgetcsv($file, 10000, $this->separator)) !== false) {
             if (!isset($item[0]) || in_array($item[0], $header, true)) {
                 continue;
             }
@@ -77,7 +79,7 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
             foreach ($data as [$name, $email]) {
 
                 if ($email) {
-                    $this->subscriberService->import($name, $email, $this->subscribed);
+                    $this->subscriberService->import($user, $name, $email, $this->subscribed);
                     $count++;
                 }
             }
@@ -88,16 +90,16 @@ final class SubscriberImportService extends ImportAbstruct implements ImportInte
         return $count;
     }
 
-    public function setSubscribed(bool $subscribed): static
+    public function setSubscribed(bool $subscribed): SubscriberImporter
     {
         $this->subscribed = $subscribed;
 
         return $this;
     }
 
-    public function setSeperator(string $seberator): static
+    public function setSeparator(string $separator): SubscriberImporter
     {
-        $this->seberator = $seberator;
+        $this->separator = $separator;
 
         return $this;
     }

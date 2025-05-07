@@ -15,33 +15,31 @@
                     <div class="col-sm-6">
 
                         <ol class="breadcrumb text-end fs-15 pb-2">
-                            {% if newsletters is defined and newsletters and is_granted('ROLE_SUPER_ADMIN') %}
-                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#addModal">
-                                    <span class="md-d-none pr-1">New</span> <span class="fa fa-plus fa-sm"></span>
-                                </li>
 
+                            <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#addModal">
+                                <span class="md-d-none pr-1">New</span> <span class="fa fa-plus fa-sm"></span>
+                            </li>
+
+                            {% if newsletters is defined and newsletters and is_granted('ROLE_USER') %}
                                 <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#exportModal">
                                     <span class="md-d-none pr-1">Export</span> <span
                                             class="fa fa-download fa-sm"></span>
                                 </li>
 
-                                <li class="text-secondary pointer d-btn" data-toggle="modal"
-                                    data-target="#deleteAllPermanentlyModal"
-                                    title="Delete All Newsletters Permanently">
-                                    <span class="md-d-none pr-1">Delete</span> <span class="fa fa-trash fa-xs"></span>
-                                </li>
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <li class="text-secondary pointer d-btn" data-toggle="modal"
+                                        data-target="#deleteAllPermanentlyModal"
+                                        title="Delete All Newsletters Permanently">
+                                        <span class="md-d-none pr-1">Delete</span> <span class="fa fa-trash fa-xs"></span>
+                                    </li>
+                                {% endif %}
 
-                                <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#infoModal">
-                                    <span class="md-d-none pr-1">Infos</span> <span
-                                            class="fa fa-info-circle fa-sm"></span>
-                                </li>
-                            {% else %}
-
-                                <li class="text-primary pointer" data-toggle="modal" data-target="#addModal">
-                                    <span class="md-d-none pr-1">Add Newsletter</span> <span
-                                            class="fa fa-plus fa-sm"></span>
-                                </li>
                             {% endif %}
+
+                            <li class="text-secondary pointer d-btn" data-toggle="modal" data-target="#infoModal">
+                                <span class="md-d-none pr-1">Infos</span> <span
+                                        class="fa fa-info-circle fa-sm"></span>
+                            </li>
                         </ol>
                     </div>
                 </div>

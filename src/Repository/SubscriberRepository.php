@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Subscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Subscriber>
@@ -37,6 +38,21 @@ class SubscriberRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @return Subscriber[]
+     */
+    public function findAllByUserWithOffsetAndLimit(UserInterface $user, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('t1')
+            ->where('t1.user = :user')
+            ->setParameter('user', $user)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->orderBy('t1.id', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

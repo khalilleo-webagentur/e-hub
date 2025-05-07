@@ -1,11 +1,16 @@
 {% if newsletters is defined and newsletters %}
     <div class="col-md-12">
         <div class="card-body table-responsive bg-white p-0 mb-3">
+            {% set isSuperAdmin = is_granted('ROLE_SUPER_ADMIN') %}
             <table class="table table-hover text-nowrap">
                 <thead>
                 <tr class="fs-14">
+                    {% if isSuperAdmin %}
+                        <th>{{ 'User'|trans }}</th>
+                    {% endif %}
                     <th>{{ 'Title'|trans }}</th>
                     <th>{{ 'isReadyToSend'|trans }}</th>
+                    <th>{{ 'Token'|trans }}</th>
                     <th>{{ 'isSent'|trans }}</th>
                     <th>{{ 'Modified'|trans }}</th>
                     <th>{{ 'Created'|trans }}</th>
@@ -18,11 +23,23 @@
 
                     <tr class="table-text-color font-size-14">
 
+                        {% if isSuperAdmin %}
+                            <td>
+                                <a href="{{ path('app_admin_user_edit', {id:newsletter.user.id}) }}">
+                                    {{ newsletter.user.name }}
+                                </a>
+                            </td>
+                        {% endif %}
+
                         <td>
                             <span class="{{ newsletter.isSent ? 'del' : '' }}">{{ newsletter.title|capitalize }}</span>
                         </td>
 
                         <td>{{ newsletter.canBePublished ? faCircle('text-success') : faCircle('text-light-50') }}</td>
+
+                        <td>
+                            <small>{{ newsletter.token ? newsletter.token : '---' }}</small>
+                        </td>
 
                         <td>
                             <small>{{ newsletter.isSent ? faThumbsUp() : faThumbsDown() }}</small>

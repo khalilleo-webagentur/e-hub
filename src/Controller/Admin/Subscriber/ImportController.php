@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Subscriber;
 
 use App\Controller\Admin\AbstractBaseController;
-use App\Service\Import\SubscriberImportService;
+use App\Service\Import\SubscriberImporter;
 use App\Service\UserService;
 use App\Traits\FormValidationTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/subscribers/import')]
+#[Route('/u7x6g2q8r6/subscribers/import')]
 class ImportController extends AbstractBaseController
 {
     use FormValidationTrait;
@@ -28,7 +28,7 @@ class ImportController extends AbstractBaseController
     #[Route('/import-subscribers-data', name: 'app_admin_newsletter_subscribers_import', methods: 'POST')]
     public function import(
         Request                 $request,
-        SubscriberImportService $subscriberImportService
+        SubscriberImporter $subscriberImportService
     ): RedirectResponse
     {
 
@@ -37,7 +37,7 @@ class ImportController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        $this->denyAccessUnlessGrantedRoleAdmin();
+        $this->denyAccessUnlessGrantedRoleUser();
 
         /** @var UploadedFile $file */
         $file = $request->files->get('type');
@@ -47,12 +47,14 @@ class ImportController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
         }
 
+        $user = $this->getUser();
+
         if ($file->getClientOriginalExtension() === 'csv') {
 
             $countImportedSubscribers = $subscriberImportService
                 ->setSubscribed($this->validateCheckbox($request->request->get('subscribed')))
-                ->setSeperator($this->escape($request->request->get('seperator'), false))
-                ->fromCsv($file);
+                ->setSeparator($this->escape($request->request->get('seperator'), false))
+                ->fromCsv($file, $user);
 
             $this->addFlash(
                 'success',
@@ -66,7 +68,7 @@ class ImportController extends AbstractBaseController
 
             $countImportedSubscribers = $subscriberImportService
                 ->setSubscribed($this->validateCheckbox($request->request->get('subscribed')))
-                ->fromJson($file);
+                ->fromJson($file, $user);
 
             $this->addFlash(
                 'success',
@@ -76,7 +78,7 @@ class ImportController extends AbstractBaseController
             return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
         }
 
-        $this->addFlash('warning', 'Subscribers could not be implorted');
+        $this->addFlash('warning', 'Subscribers could not be imported.');
 
         return $this->redirectToRoute(self::ADMIN_SUBSCRIBERS_ROUTE_INDEX);
     }

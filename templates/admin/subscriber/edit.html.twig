@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form class="pb-3" action="{{ path('app_admin_newsletter_subscriber_store') }}" method="post">
+                        <form class="pb-3 area-section" action="{{ path('app_admin_newsletter_subscriber_store') }}" method="post">
                             <div class="form-group">
                                 <label for="inputName">{{ 'Name'|trans }}: <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="inputName" name="name"
@@ -94,7 +94,7 @@
                         </form>
                     </div>
                     <div class="col-lg-6">
-                        <div class="mt-3 bg-white pl-3 pr-3 pt-3 pb-3">
+                        <div class="area-section bg-white pl-3 pr-3 pb-3">
                             <p><span class="text-bold mr-2">{{ 'Name'|trans }}:</span>
                                 {{ subscriber.name|capitalize }} # {{ subscriber.id }}
                             </p>
