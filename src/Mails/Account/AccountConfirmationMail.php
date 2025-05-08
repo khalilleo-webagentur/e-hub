@@ -8,7 +8,6 @@ use App\Mails\AbstractMail;
 use App\Mails\MailInterface;
 use App\Service\ConfigService;
 use App\Service\Dev\Mailer;
-use App\Service\MonologService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -17,8 +16,7 @@ final class AccountConfirmationMail extends AbstractMail implements MailInterfac
 {
     public function __construct(
         private readonly MailerInterface $mailer,
-        private readonly ConfigService   $configService,
-        private readonly MonologService  $monolog
+        private readonly ConfigService   $configService
     ) {
     }
 
@@ -34,8 +32,9 @@ final class AccountConfirmationMail extends AbstractMail implements MailInterfac
                 )
             )
             ->to(new address($userEmail, $username))
-            ->subject('Email Verification')
+            ->subject('E-Hub QA: Email Verification')
             ->htmlTemplate('mails/account/confirmation_email.html.twig')
+            ->textTemplate('mails/account/confirmation_email.txt.twig')
             ->context([
                 'username' => $username,
                 'token' => $token,

@@ -1,0 +1,21 @@
+Hi {{ username|capitalize }},
+
+you have requested to update your email on {{ appName() }}, please verify your email.
+
+{{ absolute_url(path('app_profile_personal_data_email_verify', {token:token})) }}
+
+If you did not request this, please ignore this email. Maybe someone has mistyped his email.
+
+Best Regards,
+
+The {{ appName() }} Team
+
+........................................................
+Homepage: {{ absolute_url(path('app_home')) }}
+{{ 'Have a question or need Help?'|trans }} {{ absolute_url(path('app_contact_us_index')) }}
+{% if showUnSubscriptionLink is defined and showUnSubscriptionLink %}
+    {{ 'Unsubscribe'|trans }} {{ absolute_url(path('app_home_newsletter_unsubscribe', {token: token})) }}
+{% endif %}
+........................................................
+
+Copyright {{ appName() }} {{ year() }} - {{ 'All Rights Reserved'|trans }} - {{ version() }}

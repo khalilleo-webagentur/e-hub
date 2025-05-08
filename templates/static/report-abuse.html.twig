@@ -47,7 +47,17 @@
 
                         <div class="mb-4">
                             <label for="iMessage" class="form-label text-white-50">Message</label>
-                            <textarea class="form-control" id="iMessage" rows="5" name="iMessage"
+                            <textarea class="form-control"
+                                      id="iMessage"
+                                      rows="5"
+                                      name="iMessage"
+                                      spellcheck="false"
+                                      ondragstart="return false"
+                                      ondrop="return false"
+                                      dir="auto"
+                                      autocapitalize="off"
+                                      autocomplete="off"
+                                      translate="no"
                                       style="border-radius: 0;"
                                       placeholder="Type your message (optional)"></textarea>
                         </div>
@@ -72,7 +82,7 @@
 
                 <div class="col-lg-6">
                     <div class="md-d-none py-3 text-center mt-5 pt-5" style="opacity: 0.02;">
-                        <img src="{{ asset('assets/img/abuse.png') }}" alt="">
+                        <img src="{{ asset('assets/img/abuse.png?v=1.0') }}" alt="">
                     </div>
                 </div>
             </div>

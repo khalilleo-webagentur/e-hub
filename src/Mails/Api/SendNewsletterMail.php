@@ -34,8 +34,9 @@ final class SendNewsletterMail extends AbstractMail implements MailInterface
                 )
             )
             ->to(new address($subEmail, $subName))
-            ->subject($subject)
+            ->subject('E-Hub QA: ' . $subject)
             ->htmlTemplate('mails/api/send_newsletter_content.html.twig')
+            ->textTemplate('mails/api/send_newsletter_content.txt.twig')
             ->context([
                 'username' => $subName,
                 'title' => $newsTitle,

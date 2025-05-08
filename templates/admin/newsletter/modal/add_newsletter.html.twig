@@ -23,7 +23,17 @@
 
                         <div class="form-group">
                             <label for="content">{{ 'Newsletter'|trans }}: <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="content" name="content" rows="7"
+                            <textarea class="form-control"
+                                      id="content"
+                                      name="content"
+                                      rows="7"
+                                      spellcheck="false"
+                                      ondragstart="return false"
+                                      ondrop="return false"
+                                      dir="auto"
+                                      autocapitalize="off"
+                                      autocomplete="off"
+                                      translate="no"
                                       placeholder="Example: Duis autem vel eum iriure dolor in hendrerit on https://example.de in vulputate velit esse molestie."
                                       required></textarea>
                         </div>

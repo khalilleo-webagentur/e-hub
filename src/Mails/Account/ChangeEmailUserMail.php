@@ -8,7 +8,6 @@ use App\Mails\AbstractMail;
 use App\Mails\MailInterface;
 use App\Service\ConfigService;
 use App\Service\Dev\Mailer;
-use App\Service\MonologService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -17,8 +16,7 @@ final class ChangeEmailUserMail extends AbstractMail implements MailInterface
 {
     public function __construct(
         private readonly MailerInterface $mailer,
-        private readonly ConfigService   $configService,
-        private readonly MonologService  $monolog
+        private readonly ConfigService   $configService
     ) {
     }
 
@@ -34,8 +32,9 @@ final class ChangeEmailUserMail extends AbstractMail implements MailInterface
                 )
             )
             ->to(new address($userEmail, $username))
-            ->subject('Email Verification')
+            ->subject('E-Hub QA: Email Verification')
             ->htmlTemplate('mails/account/update_email.html.twig')
+            ->textTemplate('mails/account/update_email.txt.twig')
             ->context([
                 'username' => $username,
                 'token' => $token,

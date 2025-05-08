@@ -1,7 +1,7 @@
 <nav class="navbar bg-white">
     <div class="container-fluid">
         <a href="{{ app.request.schemeAndHttpHost }}" class="navbar-brand">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="LOGO {{ appName() }}" height="20"> {{ appName() }}
+            <img src="{{ asset('assets/img/logo.png?v=1.0') }}" alt="LOGO {{ appName() }}" height="20"> {{ appName() }}
         </a>
         <div class="d-flex">
             {% if is_granted('ROLE_USER') %}

@@ -8,7 +8,6 @@ use App\Mails\AbstractMail;
 use App\Mails\MailInterface;
 use App\Service\ConfigService;
 use App\Service\Dev\Mailer;
-use App\Service\MonologService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -17,8 +16,7 @@ final class ContactFormNewMessageMail extends AbstractMail implements MailInterf
 {
     public function __construct(
         private readonly MailerInterface $mailer,
-        private readonly ConfigService   $configService,
-        private readonly MonologService  $monolog
+        private readonly ConfigService   $configService
     ) {
     }
 
@@ -36,8 +34,9 @@ final class ContactFormNewMessageMail extends AbstractMail implements MailInterf
                 )
             )
             ->to(new address($webmasterEmail, $webmasterName))
-            ->subject('New Message Arrived')
+            ->subject('E-Hub QA: New Message Arrived')
             ->htmlTemplate('mails/admin/contact_form_new_message.html.twig')
+            ->textTemplate('mails/admin/contact_form_new_message.txt.twig')
             ->context([
                 'username' => $webmasterName
             ]);

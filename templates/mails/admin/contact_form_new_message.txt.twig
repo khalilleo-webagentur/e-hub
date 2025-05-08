@@ -1,0 +1,23 @@
+Hi {{ username|capitalize }},
+
+A new Message from {{ appName() }} has been just arrived.
+
+Please read the message and make a Response.
+
+{{ absolute_url(path('app_login')) }}
+
+This is an automatically generated message, please do not reply to this sender.
+
+Best Regards,
+
+The {{ appName() }} Team
+
+........................................................
+Homepage: {{ absolute_url(path('app_home')) }}
+{{ 'Have a question or need Help?'|trans }} {{ absolute_url(path('app_contact_us_index')) }}
+{% if showUnSubscriptionLink is defined and showUnSubscriptionLink %}
+    {{ 'Unsubscribe'|trans }} {{ absolute_url(path('app_home_newsletter_unsubscribe', {token: token})) }}
+{% endif %}
+........................................................
+
+Copyright {{ appName() }} {{ year() }} - {{ 'All Rights Reserved'|trans }} - {{ version() }}

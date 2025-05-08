@@ -43,7 +43,16 @@
                                 <div class="form-group">
                                     <label for="content">{{ 'Content'|trans }}: <span
                                                 class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="content" name="content"
+                                    <textarea class="form-control"
+                                              id="content"
+                                              name="content"
+                                              spellcheck="false"
+                                              ondragstart="return false"
+                                              ondrop="return false"
+                                              dir="auto"
+                                              autocapitalize="off"
+                                              autocomplete="off"
+                                              translate="no"
                                               placeholder="{{ 'Content (Required)'|trans }}" rows="5"
                                               required>{{ newsletter.content }}</textarea>
                                 </div>

@@ -38,3 +38,11 @@ async function copyContent(text) {
         console.error('Failed to copy: ', err);
     }
 }
+
+// blur images
+window.addEventListener('load', function() {
+    const image = document.querySelector('img');
+    if (image) {
+        image.style.filter = 'blur(0)';
+    }
+});

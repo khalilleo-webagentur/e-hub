@@ -1,0 +1,21 @@
+Hi {{ username|capitalize }},
+
+{{ title }}
+
+{{ content|raw }}
+
+You are receiving this email because of your email on {{ appName() }} subscription List.
+
+Best Regards,
+
+The {{ appName() }} Team
+
+........................................................
+Homepage: {{ absolute_url(path('app_home')) }}
+{{ 'Have a question or need Help?'|trans }} {{ absolute_url(path('app_contact_us_index')) }}
+{% if showUnSubscriptionLink is defined and showUnSubscriptionLink %}
+    {{ 'Unsubscribe'|trans }} {{ absolute_url(path('app_home_newsletter_unsubscribe', {token: token})) }}
+{% endif %}
+........................................................
+
+Copyright {{ appName() }} {{ year() }} - {{ 'All Rights Reserved'|trans }} - {{ version() }}
