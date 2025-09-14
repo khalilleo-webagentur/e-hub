@@ -18,7 +18,7 @@ class ImportController extends AbstractBaseController
 {
     use FormValidationTrait;
 
-    private const ADMIN_SUBSCRIBERS_ROUTE_INDEX = 'app_admin_newsletter_subscribers_index';
+    private const string ADMIN_SUBSCRIBERS_ROUTE_INDEX = 'app_admin_newsletter_subscribers_index';
 
     public function __construct(
         private readonly UserService $userService,
@@ -48,11 +48,12 @@ class ImportController extends AbstractBaseController
         }
 
         $user = $this->getUser();
+        $subscribed = $this->validateCheckbox($request->request->get('subscribed'));
 
         if ($file->getClientOriginalExtension() === 'csv') {
 
             $countImportedSubscribers = $subscriberImportService
-                ->setSubscribed($this->validateCheckbox($request->request->get('subscribed')))
+                ->setSubscribed($subscribed)
                 ->setSeparator($this->escape($request->request->get('seperator'), false))
                 ->fromCsv($file, $user);
 
@@ -67,7 +68,7 @@ class ImportController extends AbstractBaseController
         if ($file->getClientOriginalExtension() === 'json') {
 
             $countImportedSubscribers = $subscriberImportService
-                ->setSubscribed($this->validateCheckbox($request->request->get('subscribed')))
+                ->setSubscribed($subscribed)
                 ->fromJson($file, $user);
 
             $this->addFlash(
