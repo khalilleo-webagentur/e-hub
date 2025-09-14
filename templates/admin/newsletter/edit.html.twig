@@ -107,10 +107,14 @@
                                 </p>
 
                                 <p><span class="text-bold mr-2">Token:</span>
-                                    <a href="{{ app.request.schemeAndHttpHost }}/send/newsletter/{{ newsletter.token }}"
-                                       target="_blank">
-                                        Visiting this Link will send the newsletter directly
-                                    </a>
+                                    {% if not newsletter.isSent %}
+                                        <a href="{{ app.request.schemeAndHttpHost }}/send/newsletter/{{ newsletter.token }}"
+                                           target="_blank">
+                                            Visiting this Link will send the newsletter directly
+                                        </a>
+                                    {% else %}
+                                        Newsletter cannot be sent
+                                    {% endif %}
                                 </p>
 
                                 <p><span class="text-bold mr-2">{{ 'Can be published'|trans }}:</span>
