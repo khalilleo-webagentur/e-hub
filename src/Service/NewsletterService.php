@@ -92,7 +92,7 @@ final class NewsletterService
 
         if (empty($newsletter)) {
             $newsletter = new Newsletter();
-            $token = $this->getRandomTokenOnlyLetters();
+            $token = $this->getRandomApiToken();
         }
 
         $newsletter
