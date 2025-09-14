@@ -238,7 +238,7 @@ final class SubscriberService
             ->setName($name)
             ->setEmail($email)
             ->setIsSubscribed($subscribed)
-            ->setToken($this->getRandomToken(32));
+            ->setToken($this->getRandomApiToken());
 
         $this->save($entity);
     }
