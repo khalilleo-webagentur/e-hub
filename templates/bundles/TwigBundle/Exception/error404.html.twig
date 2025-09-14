@@ -1,0 +1,23 @@
+{% extends 'layout/base_without.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid user-select-none py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col col-lg-6">
+                    <div class="text-center">
+                        <h3 style="font-size: 140px; color: #6c6c6c;">404</h3>
+                        <h4 class="text-white-50">Oops! This Page could not be found</h4>
+                        <p class="fs-14 text-secondary">
+                            Sorry but the Page you're looking for does not exist, have been removed, Name changed or is
+                            Temporarily unavailable.
+                        </p>
+                        <a href="{{ path('app_home') }}" class="text-decoration-none d-color fs-14">
+                            Go to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

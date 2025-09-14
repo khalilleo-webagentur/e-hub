@@ -1,0 +1,24 @@
+{% extends 'layout/base_without.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid user-select-none py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col col-lg-6">
+                    <div class="text-center">
+                        <h3 style="font-size: 140px; color: #6c6c6c;">403</h3>
+                        <h4 class="text-white-50">Access Denied</h4>
+                        <p class="fs-14 text-secondary">
+                            We're sorry, but you do not have permission to access this page. This could be due to
+                            insufficient privileges or an attempt to access a restricted area. If you believe this is an
+                            error, please contact us for assistance.
+                        </p>
+                        <a href="{{ path('app_home') }}" class="text-decoration-none d-color fs-14">
+                            Go to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

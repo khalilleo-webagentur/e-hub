@@ -1,0 +1,25 @@
+{% extends 'layout/base_without.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid user-select-none py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col col-lg-6">
+                    <div class="text-center">
+                        <h3 style="font-size: 140px; color: #6c6c6c;">400</h3>
+                        <h4 class="text-white-50">Bad Request</h4>
+                        <p class="fs-14 text-secondary">
+                            Oops! It seems there was an issue with your request. The server could not understand the
+                            request due to invalid syntax. Please check the URL for any errors or try again with the
+                            correct information. If you continue to experience issues, feel free to contact us for
+                            assistance.
+                        </p>
+                        <a href="{{ path('app_home') }}" class="text-decoration-none d-color fs-14">
+                            Go to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
