@@ -24,11 +24,11 @@
         </div>
 
         <section class="content">
-            <div class="container-fluid area-section">
+            <div class="container-fluid">
 
-                <div class="row">
+                <div class="row area-section">
                     <div class="col-lg-6">
-                        <form action="{{ path('app_admin_user_store', {id:user.id}) }}" method="post">
+                        <form action="{{ path('app_admin_user_store', {id:user.id}) }}" method="post" class="mt-2">
 
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
@@ -50,7 +50,7 @@
                                        value="{{ user.token }}" name="token">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="4lN3jG3gE9oB3o"
                                            name="isVerified"
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="7lN3jG3gE9oB3Do"
                                            name="isDeleted"

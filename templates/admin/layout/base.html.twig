@@ -5,18 +5,18 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="csrf-token" content="cf6f861916b2e16b2cf884a222ac134f2fb7620d"/>
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="NO-CACHE">
-    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="csrf-token" content="{{ csrf_token('meta') }}"/>
+    <meta http-equiv="default-style" content="on">
     <meta name="referrer" content="origin">
-    <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
+    <meta http-equiv="refresh" content="no-referrer, strict-origin-when-cross-origin">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta property="og:locale" content="de_DE"/>
+    <meta property="og:locale" content="en_EN"/>
 
     <title> {% block title %}{% endblock %} </title>
 
     <meta content="noindex,nofollow" name="robots">
+    <meta name="description"
+          content="E-Mail-Marketing-Software ist ein Tool, das es Unternehmen ermöglicht, E-Mail-Kampagnen zu erstellen, zu versenden und zu verfolgen, um mit ihrem Publikum in Kontakt zu treten und die Conversion-Rate zu steigern."/>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -32,7 +32,7 @@
     <meta name="author" content="khalilleo Team">
     <meta name="created" content="18-06-2024"/>
     <meta content="telephone=no" name="format-detection"/>
-    <link rel='dns-prefetch' href='//www.ehub.khalilleo.com'/>
+    <link rel='dns-prefetch' href='{{ app.request.schemeAndHttpHost }}'/>
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('lte/css/root.min.css?v=3.4.0') }}">

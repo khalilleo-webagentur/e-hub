@@ -17,6 +17,10 @@ label, label:not(.form-check-label):not(.custom-file-label) {
     color: #000
 }
 
+.table thead th {
+    border-top: none !important;
+}
+
 .btn {
     text-transform: capitalize;
     border-radius: 5px;
@@ -149,10 +153,8 @@ body {
 .area-section {
     border-radius: 10px;
     background-color: #fff;
-    margin-bottom: 20px;
     border: 1px solid #ece9e9;
-    opacity: .9;
-    padding: 15px;
+    padding: 10px;
 }
 
 .d-btn {
