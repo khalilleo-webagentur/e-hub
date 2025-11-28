@@ -1,7 +1,8 @@
 # Changelogs
 
 ### Unreleased
--
+- add changelog and tools
+- composer upgrade packages
 
 ### [2.0.1]
 - PHP 8.4 & Symfony 7.3
